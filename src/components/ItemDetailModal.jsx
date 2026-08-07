@@ -1,9 +1,9 @@
 import React from 'react';
-import { X, Star, CheckCircle, Share2, Sparkles, Clock, ShieldCheck } from 'lucide-react';
+import { X, Star, CheckCircle, Share2, Clock, ShieldCheck, Plus, Minus, ShoppingBag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import bakeryInfo from '../data/bakeryInfo.json';
 
-export default function ItemDetailModal({ item, onClose }) {
+export default function ItemDetailModal({ item, onClose, quantity = 0, onUpdateQuantity }) {
   if (!item) return null;
 
   const handleShare = () => {
@@ -17,6 +17,18 @@ export default function ItemDetailModal({ item, onClose }) {
       navigator.clipboard.writeText(window.location.href);
       alert('Menu link copied to clipboard!');
     }
+  };
+
+  const handleAdd = () => {
+    if (onUpdateQuantity) onUpdateQuantity(item, 1);
+  };
+
+  const handleMinus = () => {
+    if (onUpdateQuantity) onUpdateQuantity(item, quantity - 1);
+  };
+
+  const handlePlus = () => {
+    if (onUpdateQuantity) onUpdateQuantity(item, quantity + 1);
   };
 
   return (
@@ -134,21 +146,59 @@ export default function ItemDetailModal({ item, onClose }) {
               </div>
             </div>
 
-            {/* Action Footer */}
-            <div className="pt-2 flex items-center justify-between gap-3">
+            {/* Selection List Action Button */}
+            <div className="pt-1">
+              {quantity > 0 ? (
+                <div className="flex items-center justify-between p-3 rounded-2xl bg-amber-50 border-2 border-bakery-secondary/40">
+                  <div className="flex items-center gap-2 text-xs font-bold text-bakery-primary">
+                    <ShoppingBag className="w-4 h-4 text-bakery-price" />
+                    <span>In Selection List ({quantity})</span>
+                  </div>
+
+                  <div className="flex items-center gap-3 bg-bakery-primary text-white px-3 py-1.5 rounded-xl font-bold text-sm shadow">
+                    <button
+                      onClick={handleMinus}
+                      className="p-1 hover:bg-white/20 rounded transition-colors"
+                      title="Decrease"
+                    >
+                      <Minus className="w-4 h-4" />
+                    </button>
+                    <span className="font-extrabold px-1">{quantity}</span>
+                    <button
+                      onClick={handlePlus}
+                      className="p-1 hover:bg-white/20 rounded transition-colors"
+                      title="Increase"
+                    >
+                      <Plus className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={handleAdd}
+                  className="w-full py-3.5 px-4 rounded-2xl bg-bakery-price hover:bg-orange-600 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all"
+                >
+                  <Plus className="w-5 h-5" />
+                  Add to My Selection List
+                </button>
+              )}
+            </div>
+
+            {/* Secondary Share Button */}
+            <div className="flex items-center justify-between gap-3 pt-1">
               <button
                 onClick={handleShare}
-                className="flex-1 py-3 px-4 rounded-xl border border-bakery-secondary/40 text-bakery-primary font-bold text-xs flex items-center justify-center gap-2 hover:bg-amber-50 active:scale-95 transition-all"
+                className="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-2 hover:bg-slate-50 transition-colors"
               >
-                <Share2 className="w-4 h-4" />
+                <Share2 className="w-4 h-4 text-slate-500" />
                 Share Dish
               </button>
 
               <button
                 onClick={onClose}
-                className="flex-1 py-3 px-4 rounded-xl bg-bakery-primary text-white font-bold text-xs flex items-center justify-center gap-2 hover:bg-bakery-primary/90 active:scale-95 transition-all shadow-md"
+                className="flex-1 py-2.5 px-4 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center hover:bg-slate-200 transition-colors"
               >
-                Back to Menu
+                Close
               </button>
             </div>
           </div>

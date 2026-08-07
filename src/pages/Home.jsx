@@ -6,8 +6,10 @@ import SpecialsSection from '../components/SpecialsSection';
 import MenuCard from '../components/MenuCard';
 import ItemDetailModal from '../components/ItemDetailModal';
 import QrModal from '../components/QrModal';
+import MyListDrawer from '../components/MyListDrawer';
+import FloatingListBar from '../components/FloatingListBar';
 import Footer from '../components/Footer';
-import { ArrowUp, Utensils, Sparkles, Filter, Leaf } from 'lucide-react';
+import { ArrowUp, Utensils, Leaf } from 'lucide-react';
 import menuData from '../data/menu.json';
 
 const CATEGORY_ORDER = [
@@ -39,7 +41,27 @@ export default function Home() {
   const [vegOnly, setVegOnly] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isQrOpen, setIsQrOpen] = useState(false);
+  const [isListDrawerOpen, setIsListDrawerOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
+
+  // Load My Selection List from LocalStorage
+  const [myList, setMyList] = useState(() => {
+    try {
+      const saved = localStorage.getItem('bakery_my_selection_list');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  // Save My Selection List to LocalStorage on change
+  useEffect(() => {
+    try {
+      localStorage.setItem('bakery_my_selection_list', JSON.stringify(myList));
+    } catch (err) {
+      console.error('Failed to save selection list:', err);
+    }
+  }, [myList]);
 
   // Scroll listener for back to top button
   useEffect(() => {
@@ -53,6 +75,45 @@ export default function Home() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Update quantity in selection list
+  const handleUpdateQuantity = (targetItem, newQuantity) => {
+    setMyList((prev) => {
+      const existsIndex = prev.findIndex((entry) => entry.item.id === targetItem.id);
+      
+      if (newQuantity <= 0) {
+        // Remove item if quantity <= 0
+        return prev.filter((entry) => entry.item.id !== targetItem.id);
+      }
+
+      if (existsIndex >= 0) {
+        // Update existing item quantity
+        const copy = [...prev];
+        copy[existsIndex] = { ...copy[existsIndex], quantity: newQuantity };
+        return copy;
+      } else {
+        // Add new item to list
+        return [...prev, { item: targetItem, quantity: newQuantity }];
+      }
+    });
+  };
+
+  const clearList = () => {
+    setMyList([]);
+  };
+
+  // Map of itemId -> quantity for fast UI lookup
+  const myListMap = useMemo(() => {
+    const map = {};
+    myList.forEach((entry) => {
+      map[entry.item.id] = entry.quantity;
+    });
+    return map;
+  }, [myList]);
+
+  const totalItemsCount = useMemo(() => {
+    return myList.reduce((sum, entry) => sum + entry.quantity, 0);
+  }, [myList]);
 
   // Filter items based on search query, category, and veg filter
   const filteredItems = useMemo(() => {
@@ -78,12 +139,12 @@ export default function Home() {
     });
   }, [searchQuery, selectedCategory, vegOnly]);
 
-  // Extract specials items (items under category 'Specials' or with popular === true)
+  // Extract specials items
   const specialsItems = useMemo(() => {
     return menuData.filter(item => item.category === 'Specials' || item.popular === true).slice(0, 5);
   }, []);
 
-  // Group items by category for rendering structured sections
+  // Group items by category
   const groupedCategories = useMemo(() => {
     const groups = {};
     CATEGORY_ORDER.forEach((cat) => {
@@ -104,12 +165,12 @@ export default function Home() {
       {/* Sticky Header */}
       <Navbar
         onOpenQr={() => setIsQrOpen(true)}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
+        listCount={totalItemsCount}
+        onOpenList={() => setIsListDrawerOpen(true)}
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 pb-12">
+      <main className="flex-1 pb-24">
         {/* Hero Section */}
         <Hero
           searchQuery={searchQuery}
@@ -149,10 +210,12 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 1. Specials Highlights Section (Shown when on 'All' or 'Specials' tab and not actively searching) */}
+        {/* 1. Specials Highlights Section */}
         {(!searchQuery && (selectedCategory === 'All' || selectedCategory === 'Specials')) && (
           <SpecialsSection
             items={specialsItems}
+            myListMap={myListMap}
+            onUpdateQuantity={handleUpdateQuantity}
             onItemClick={(item) => setSelectedItem(item)}
           />
         )}
@@ -182,6 +245,8 @@ export default function Home() {
                       key={item.id}
                       item={item}
                       index={idx}
+                      quantity={myListMap[item.id] || 0}
+                      onUpdateQuantity={handleUpdateQuantity}
                       onItemClick={(item) => setSelectedItem(item)}
                     />
                   ))}
@@ -207,7 +272,7 @@ export default function Home() {
               )}
             </div>
           ) : selectedCategory === 'Specials' ? (
-            /* Specials Only view when Specials tab is specifically picked */
+            /* Specials Only view when Specials tab is picked */
             <div className="space-y-3">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {filteredItems.map((item, idx) => (
@@ -215,6 +280,8 @@ export default function Home() {
                     key={item.id}
                     item={item}
                     index={idx}
+                    quantity={myListMap[item.id] || 0}
+                    onUpdateQuantity={handleUpdateQuantity}
                     onItemClick={(item) => setSelectedItem(item)}
                   />
                 ))}
@@ -223,7 +290,6 @@ export default function Home() {
           ) : (
             /* Standard Categorized Group Sections */
             Object.entries(groupedCategories).map(([category, items]) => {
-              // If a specific category tab is selected, filter to that section
               if (selectedCategory !== 'All' && selectedCategory !== category) {
                 return null;
               }
@@ -254,6 +320,8 @@ export default function Home() {
                         key={item.id}
                         item={item}
                         index={idx}
+                        quantity={myListMap[item.id] || 0}
+                        onUpdateQuantity={handleUpdateQuantity}
                         onItemClick={(item) => setSelectedItem(item)}
                       />
                     ))}
@@ -265,11 +333,26 @@ export default function Home() {
         </div>
       </main>
 
+      {/* Floating Selection List Bar */}
+      <FloatingListBar
+        myList={myList}
+        onOpenList={() => setIsListDrawerOpen(true)}
+      />
+
+      {/* My Selection List Drawer */}
+      <MyListDrawer
+        isOpen={isListDrawerOpen}
+        onClose={() => setIsListDrawerOpen(false)}
+        myList={myList}
+        updateQuantity={handleUpdateQuantity}
+        clearList={clearList}
+      />
+
       {/* Floating Back to Top Button */}
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-5 z-40 p-3 rounded-full bg-bakery-price text-white shadow-bakery-float hover:bg-orange-600 active:scale-95 transition-all duration-300"
+          className={`fixed ${myList.length > 0 ? 'bottom-24' : 'bottom-6'} right-5 z-40 p-3 rounded-full bg-bakery-price text-white shadow-bakery-float hover:bg-orange-600 active:scale-95 transition-all duration-300`}
           title="Back to Top"
         >
           <ArrowUp className="w-5 h-5" />
@@ -280,6 +363,8 @@ export default function Home() {
       <ItemDetailModal
         item={selectedItem}
         onClose={() => setSelectedItem(null)}
+        quantity={selectedItem ? (myListMap[selectedItem.id] || 0) : 0}
+        onUpdateQuantity={handleUpdateQuantity}
       />
 
       {/* QR Code Share Modal */}

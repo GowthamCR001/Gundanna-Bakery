@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Instagram } from 'lucide-react';
+import { Phone, Instagram, ShoppingBag } from 'lucide-react';
 import bakeryInfo from '../data/bakeryInfo.json';
 
-export default function Navbar({ onOpenQr, searchQuery, setSearchQuery, isSearching, setIsSearching }) {
+export default function Navbar({ onOpenQr, listCount = 0, onOpenList }) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -41,6 +41,20 @@ export default function Navbar({ onOpenQr, searchQuery, setSearchQuery, isSearch
 
         {/* Right: Actions */}
         <div className="flex items-center gap-2">
+          {/* My List Counter Button */}
+          {listCount > 0 && (
+            <button
+              onClick={onOpenList}
+              className="relative p-2.5 rounded-full bg-amber-100 text-bakery-price hover:bg-amber-200 active:scale-95 transition-all flex items-center justify-center shadow-xs"
+              title="View My Selection List"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              <span className="absolute -top-1 -right-1 bg-bakery-price text-white font-extrabold text-[10px] w-4 h-4 rounded-full flex items-center justify-center border border-white shadow-xs">
+                {listCount}
+              </span>
+            </button>
+          )}
+
           {/* Quick Call */}
           <a
             href={`tel:${bakeryInfo.phone}`}

@@ -1,8 +1,23 @@
 import React from 'react';
-import { Star, CheckCircle, Info } from 'lucide-react';
+import { Star, CheckCircle, Plus, Minus } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function MenuCard({ item, onItemClick, index = 0 }) {
+export default function MenuCard({ item, onItemClick, quantity = 0, onUpdateQuantity, index = 0 }) {
+  const handleAdd = (e) => {
+    e.stopPropagation();
+    onUpdateQuantity(item, 1);
+  };
+
+  const handleMinus = (e) => {
+    e.stopPropagation();
+    onUpdateQuantity(item, quantity - 1);
+  };
+
+  const handlePlus = (e) => {
+    e.stopPropagation();
+    onUpdateQuantity(item, quantity + 1);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -56,18 +71,52 @@ export default function MenuCard({ item, onItemClick, index = 0 }) {
         </div>
       </div>
 
-      {/* Right: Item Image */}
-      <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-amber-50 shrink-0 border border-slate-100">
-        <img
-          src={item.image}
-          alt={item.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          loading="lazy"
-          onError={(e) => {
-            e.target.src = 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80';
-          }}
-        />
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+      {/* Right: Item Image & Add to List Button */}
+      <div className="relative flex flex-col items-center gap-1.5 shrink-0">
+        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-amber-50 border border-slate-100">
+          <img
+            src={item.image}
+            alt={item.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+            onError={(e) => {
+              e.target.src = 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80';
+            }}
+          />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+        </div>
+
+        {/* Add to List Button / Quantity Counter */}
+        <div className="w-full">
+          {quantity > 0 ? (
+            <div className="flex items-center justify-between bg-bakery-primary text-white text-xs font-bold rounded-lg px-2 py-1 shadow-sm">
+              <button
+                onClick={handleMinus}
+                className="p-0.5 hover:bg-white/20 rounded transition-colors"
+                title="Decrease"
+              >
+                <Minus className="w-3.5 h-3.5" />
+              </button>
+              <span className="font-extrabold px-1">{quantity}</span>
+              <button
+                onClick={handlePlus}
+                className="p-0.5 hover:bg-white/20 rounded transition-colors"
+                title="Increase"
+              >
+                <Plus className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={handleAdd}
+              className="w-full flex items-center justify-center gap-1 bg-amber-50 hover:bg-bakery-primary text-bakery-primary hover:text-white border border-bakery-secondary/40 font-bold text-xs py-1 px-2.5 rounded-lg shadow-xs active:scale-95 transition-all"
+              title="Add to selection list"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>Add</span>
+            </button>
+          )}
+        </div>
       </div>
     </motion.div>
   );
