@@ -1,0 +1,50 @@
+{
+  "name": "ಗುಂಡಣ್ಣ ಬೇಕರಿ",
+  "nameEnglish": "GUNDANNA BAKERY",
+  "nameKannada": "ಗುಂಡಣ್ಣ ಬೇಕರಿ",
+  "shortName": "Gundanna Bakes",
+  "established": "1985",
+  "tagline": "Freshly Baked Every Day",
+  "subTagline": "Fresh Since 1985 • Taste You Will Never Forget",
+  "description": "Authentic artisan bakery serving handcrafted breads, rich stuffed buns, flaky puffs, custom birthday cakes, and traditional evening snacks.",
+  "logo": "/images/bakery-logo.png",
+  "address": "Doddabasadi road, Ammeer Mohalla, Hassan, Karnataka 573201",
+  "phone": "094836 22026",
+  "phoneAlt": "094836 22026",
+  "whatsapp": "919483622026",
+  "email": "hello@gundannabakery.com",
+  "workingHours": "7:00 AM – 10:00 PM (All 7 Days)",
+  "locationUrl": "https://maps.google.com/?q=Doddabasadi+road,+Ammeer+Mohalla,+Hassan,+Karnataka+573201",
+  "rating": 4.9,
+  "reviewsCount": "1,480+",
+  "qrWebsiteUrl": "https://gundannabakerymenu1.vercel.app/",
+  "instagramHandle": "GB__GUNDANNA.BAKERY",
+  "instagramUrl": "https://www.instagram.com/gb__gundanna.bakery/",
+  "instagramQr": "/images/instagram-qr.png",
+  "features": [
+    { "icon": "🔥", "label": "100% Fresh Daily" },
+    { "icon": "🧈", "label": "Pure Butter & Ghee" },
+    { "icon": "⭐", "label": "4.9 Rated Bakery" },
+    { "icon": "🥖", "label": "Artisan Recipes" }
+  ],
+  "offers": [
+    {
+      "id": 1,
+      "badge": "Weekend Offer!",
+      "title": "Get Special Offers",
+      "discount": "Up to 30% OFF",
+      "description": "On all Signature Birthday Cakes & Premium Pastries",
+      "action": "Browse Cakes",
+      "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": 2,
+      "badge": "Morning Fresh",
+      "title": "Piping Hot Buns & Puffs",
+      "discount": "Fresh 7 AM & 4 PM",
+      "description": "Crispy Veg Puffs & Soft Cream Buns baked continuously",
+      "action": "View Specials",
+      "image": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&auto=format&fit=crop&q=80"
+    }
+  ]
+}
