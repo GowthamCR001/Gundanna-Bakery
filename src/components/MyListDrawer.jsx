@@ -23,9 +23,7 @@ export default function MyListDrawer({ isOpen, onClose, myList, updateQuantity, 
 
   const isCakeItem = (item) => {
     if (!item) return false;
-    const cat = (item.category || '').toLowerCase();
-    const name = (item.name || '').toLowerCase();
-    return cat.includes('cake') || name.includes('cake') || cat === 'specials';
+    return item.category === 'Birthday Cakes';
   };
 
   const handleWhatsAppShare = () => {

@@ -16,9 +16,8 @@ export default function ItemDetailModal({ item, onClose, quantity = 0, customiza
   if (!item) return null;
 
   const isCake = () => {
-    const cat = (item.category || '').toLowerCase();
-    const name = (item.name || '').toLowerCase();
-    return cat.includes('cake') || name.includes('cake') || cat === 'specials';
+    if (!item) return false;
+    return item.category === 'Birthday Cakes';
   };
 
   const handleShare = () => {
