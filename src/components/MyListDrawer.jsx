@@ -243,7 +243,7 @@ export default function MyListDrawer({ isOpen, onClose, myList, updateQuantity, 
                               }}
                             />
                             <div className="min-w-0">
-                              <h4 className="font-bold text-sm text-bakery-text truncate">
+                              <h4 className="font-bold text-sm text-bakery-text line-clamp-2 leading-tight">
                                 {entry.item.name}
                               </h4>
                               <span className="text-xs font-semibold text-bakery-price">

@@ -98,7 +98,7 @@ export default function SpecialsSection({ items, onItemClick, myListMap = {}, on
               {/* Content Details */}
               <div className="space-y-1.5 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-heading font-bold text-base text-bakery-text group-hover:text-bakery-price transition-colors line-clamp-1">
+                  <h3 className="font-heading font-bold text-base text-bakery-text group-hover:text-bakery-price transition-colors line-clamp-2 leading-snug">
                     {item.name}
                   </h3>
                   <p className="text-xs text-bakery-muted line-clamp-2 leading-relaxed">

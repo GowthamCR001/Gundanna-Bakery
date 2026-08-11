@@ -2,7 +2,7 @@
   {
     "id": 101,
     "category": "Specials",
-    "name": "Chocolate Bun",
+    "name": "Chocolate Bun (ಚಾಕೊಲೇಟ್ ಬನ್)",
     "price": 20,
     "rating": 4.9,
     "isVeg": true,
@@ -15,7 +15,7 @@
   {
     "id": 102,
     "category": "Specials",
-    "name": "Pistha Kunafa",
+    "name": "Pistha Kunafa (ಪಿಸ್ತಾ ಕುನಾಫಾ)",
     "price": 120,
     "rating": 4.95,
     "isVeg": true,
@@ -28,7 +28,7 @@
   {
     "id": 103,
     "category": "Specials",
-    "name": "Honey Cake",
+    "name": "Honey Cake (ಹನಿ ಕೇಕ್)",
     "price": 45,
     "rating": 4.8,
     "isVeg": true,
@@ -41,7 +41,7 @@
   {
     "id": 104,
     "category": "Specials",
-    "name": "Korean Cheese Bun",
+    "name": "Korean Cheese Bun (ಕೊರಿಯನ್ ಚೀಸ್ ಬನ್)",
     "price": 50,
     "rating": 4.9,
     "isVeg": true,
@@ -54,7 +54,7 @@
   {
     "id": 105,
     "category": "Specials",
-    "name": "Veg Puff",
+    "name": "Veg Puff (ವೆಜ್ ಪಫ್)",
     "price": 30,
     "rating": 4.85,
     "isVeg": true,
@@ -67,7 +67,7 @@
   {
     "id": 106,
     "category": "Specials",
-    "name": "Rasmalai Tres Leches Cake",
+    "name": "Rasmalai Tres Leches Cake (ರಸಮಲೈ ಟ್ರೆಸ್ ಲೇಚೆಸ್ ಕೇಕ್)",
     "price": 80,
     "rating": 4.95,
     "isVeg": true,
@@ -80,7 +80,7 @@
   {
     "id": 107,
     "category": "Specials",
-    "name": "Biscoff Cheesecake",
+    "name": "Biscoff Cheesecake (ಬಿಸ್ಕಾಫ್ ಚೀಸ್‌ಕೇಕ್)",
     "price": 70,
     "rating": 4.9,
     "isVeg": true,
@@ -90,11 +90,10 @@
     "image": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&auto=format&fit=crop&q=80",
     "description": "Rich creamy cheesecake topped with caramelized Lotus Biscoff cookie spread and crushed cookies."
   },
-
   {
     "id": 201,
     "category": "Bread",
-    "name": "Milk Bread",
+    "name": "Milk Bread (ಮಿಲ್ಕ್ ಬ್ರೆಡ್)",
     "price": 40,
     "rating": 4.7,
     "isVeg": true,
@@ -106,7 +105,7 @@
   {
     "id": 202,
     "category": "Bread",
-    "name": "Brown Bread",
+    "name": "Brown Bread (ಬ್ರೌನ್ ಬ್ರೆಡ್)",
     "price": 45,
     "rating": 4.6,
     "isVeg": true,
@@ -118,7 +117,7 @@
   {
     "id": 203,
     "category": "Bread",
-    "name": "Sandwich Bread",
+    "name": "Sandwich Bread (ಸ್ಯಾಂಡ್‌ವಿಚ್ ಬ್ರೆಡ್)",
     "price": 50,
     "rating": 4.8,
     "isVeg": true,
@@ -130,7 +129,7 @@
   {
     "id": 204,
     "category": "Bread",
-    "name": "Garlic Bread Loaf",
+    "name": "Garlic Bread Loaf (ಗಾರ್ಲಿಕ್ ಬ್ರೆಡ್)",
     "price": 60,
     "rating": 4.75,
     "isVeg": true,
@@ -143,7 +142,7 @@
   {
     "id": 205,
     "category": "Bread",
-    "name": "Normal Bread",
+    "name": "Normal Bread (ಸಾಮಾನ್ಯ ಬ್ರೆಡ್)",
     "price": 50,
     "rating": 4.65,
     "isVeg": true,
@@ -155,7 +154,7 @@
   {
     "id": 206,
     "category": "Bread",
-    "name": "Wheat Bread",
+    "name": "Wheat Bread (ಗೋಧಿ ಬ್ರೆಡ್)",
     "price": 30,
     "rating": 4.7,
     "isVeg": true,
@@ -168,7 +167,7 @@
   {
     "id": 207,
     "category": "Bread",
-    "name": "Salt Bread",
+    "name": "Salt Bread (ಸಾಲ್ಟ್ ಬ್ರೆಡ್)",
     "price": 30,
     "rating": 4.6,
     "isVeg": true,
@@ -180,7 +179,7 @@
   {
     "id": 208,
     "category": "Bread",
-    "name": "Bread Toast",
+    "name": "Bread Toast (ಬ್ರೆಡ್ ಟೋಸ್ಟ್)",
     "price": 20,
     "rating": 4.8,
     "isVeg": true,
@@ -189,11 +188,10 @@
     "image": "https://images.unsplash.com/photo-1619535860434-ba1d8fa12536?w=600&auto=format&fit=crop&q=80",
     "description": "Crispy double-baked golden bread toasts, perfect companion for evening hot tea or coffee."
   },
-
   {
     "id": 301,
     "category": "Buns",
-    "name": "Cream Bun",
+    "name": "Cream Bun (ಕ್ರೀಮ್ ಬನ್)",
     "price": 25,
     "rating": 4.8,
     "isVeg": true,
@@ -206,7 +204,7 @@
   {
     "id": 302,
     "category": "Buns",
-    "name": "Jam Bun",
+    "name": "Jam Bun (ಜಾಮ್ ಬನ್)",
     "price": 25,
     "rating": 4.7,
     "isVeg": true,
@@ -218,7 +216,7 @@
   {
     "id": 303,
     "category": "Buns",
-    "name": "Sweet Bun (Dilkush)",
+    "name": "Sweet Bun (Dilkush) (ದಿಲ್‌ಖುಷ್ ಬನ್)",
     "price": 35,
     "rating": 4.85,
     "isVeg": true,
@@ -231,7 +229,7 @@
   {
     "id": 304,
     "category": "Buns",
-    "name": "Khara Bun (Masala)",
+    "name": "Khara Bun (Masala) (ಖಾರಾ ಬನ್)",
     "price": 30,
     "rating": 4.9,
     "isVeg": true,
@@ -244,7 +242,7 @@
   {
     "id": 305,
     "category": "Buns",
-    "name": "Chocolate Bun",
+    "name": "Chocolate Bun (ಚಾಕೊಲೇಟ್ ಬನ್)",
     "price": 20,
     "rating": 4.9,
     "isVeg": true,
@@ -257,7 +255,7 @@
   {
     "id": 306,
     "category": "Buns",
-    "name": "Normal Bun (5 Pcs)",
+    "name": "Normal Bun (5 Pcs) (ಸಾಮಾನ್ಯ ಬನ್)",
     "price": 30,
     "rating": 4.75,
     "isVeg": true,
@@ -269,7 +267,7 @@
   {
     "id": 307,
     "category": "Buns",
-    "name": "Special Bun (5 Pcs)",
+    "name": "Special Bun (5 Pcs) (ಸ್ಪೆಷಲ್ ಬನ್)",
     "price": 35,
     "rating": 4.8,
     "isVeg": true,
@@ -282,7 +280,7 @@
   {
     "id": 308,
     "category": "Buns",
-    "name": "Garlic Cheese Bun",
+    "name": "Garlic Cheese Bun (ಗಾರ್ಲಿಕ್ ಚೀಸ್ ಬನ್)",
     "price": 60,
     "rating": 4.85,
     "isVeg": true,
@@ -295,7 +293,7 @@
   {
     "id": 309,
     "category": "Buns",
-    "name": "Masala Bun",
+    "name": "Masala Bun (ಮಸಾಲ ಬನ್)",
     "price": 20,
     "rating": 4.7,
     "isVeg": true,
@@ -307,7 +305,7 @@
   {
     "id": 310,
     "category": "Buns",
-    "name": "Alu Bun",
+    "name": "Alu Bun (ಆಲೂ ಬನ್)",
     "price": 20,
     "rating": 4.75,
     "isVeg": true,
@@ -319,7 +317,7 @@
   {
     "id": 311,
     "category": "Buns",
-    "name": "Korean Cheese Bun",
+    "name": "Korean Cheese Bun (ಕೊರಿಯನ್ ಚೀಸ್ ಬನ್)",
     "price": 50,
     "rating": 4.9,
     "isVeg": true,
@@ -332,7 +330,7 @@
   {
     "id": 312,
     "category": "Buns",
-    "name": "Pav Bun Pack",
+    "name": "Pav Bun Pack (ಪಾವ್ ಬನ್ ಪ್ಯಾಕ್)",
     "price": 30,
     "rating": 4.8,
     "isVeg": true,
@@ -342,11 +340,10 @@
     "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80",
     "description": "Pack of soft, fluffy pav buns ideal for pairing with Pav Bhaji or Vada Pav."
   },
-
   {
     "id": 401,
     "category": "Puffs",
-    "name": "Veg Puff",
+    "name": "Veg Puff (ವೆಜ್ ಪಫ್)",
     "price": 30,
     "rating": 4.85,
     "isVeg": true,
@@ -358,7 +355,7 @@
   {
     "id": 402,
     "category": "Puffs",
-    "name": "Egg Puff",
+    "name": "Egg Puff (ಎಗ್ ಪಫ್)",
     "price": 35,
     "rating": 4.9,
     "isVeg": false,
@@ -371,7 +368,7 @@
   {
     "id": 403,
     "category": "Puffs",
-    "name": "Paneer Puff",
+    "name": "Paneer Puff (ಪನೀರ್ ಪಫ್)",
     "price": 40,
     "rating": 4.8,
     "isVeg": true,
@@ -383,7 +380,7 @@
   {
     "id": 404,
     "category": "Puffs",
-    "name": "Mushroom Puff",
+    "name": "Mushroom Puff (ಮಶ್ರೂಮ್ ಪಫ್)",
     "price": 45,
     "rating": 4.75,
     "isVeg": true,
@@ -395,7 +392,7 @@
   {
     "id": 405,
     "category": "Puffs",
-    "name": "Veg Burger",
+    "name": "Veg Burger (ವೆಜ್ ಬರ್ಗರ್)",
     "price": 40,
     "rating": 4.8,
     "isVeg": true,
@@ -408,7 +405,7 @@
   {
     "id": 406,
     "category": "Puffs",
-    "name": "Veg Roll",
+    "name": "Veg Roll (ವೆಜ್ ರೋಲ್)",
     "price": 30,
     "rating": 4.7,
     "isVeg": true,
@@ -420,7 +417,7 @@
   {
     "id": 407,
     "category": "Puffs",
-    "name": "Baby Corn Cheese Roll",
+    "name": "Baby Corn Cheese Roll (ಬೇಬಿ ಕಾರ್ನ್ ಚೀಸ್ ರೋಲ್)",
     "price": 60,
     "rating": 4.85,
     "isVeg": true,
@@ -430,11 +427,10 @@
     "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format&fit=crop&q=80",
     "description": "Golden roll filled with crispy baby corn pieces and rich melted cheese."
   },
-
   {
     "id": 501,
     "category": "Cakes",
-    "name": "Honey Cake",
+    "name": "Honey Cake (ಹನಿ ಕೇಕ್)",
     "price": 45,
     "rating": 4.8,
     "isVeg": true,
@@ -446,7 +442,7 @@
   {
     "id": 502,
     "category": "Cakes",
-    "name": "Plain Tea Cake",
+    "name": "Plain Tea Cake (ಪ್ಲೇನ್ ಟೀ ಕೇಕ್)",
     "price": 35,
     "rating": 4.7,
     "isVeg": true,
@@ -458,7 +454,7 @@
   {
     "id": 503,
     "category": "Cakes",
-    "name": "Plum Fruit Cake",
+    "name": "Plum Fruit Cake (ಪ್ಲಮ್ ಫ್ರೂಟ್ ಕೇಕ್)",
     "price": 60,
     "rating": 4.9,
     "isVeg": true,
@@ -471,7 +467,7 @@
   {
     "id": 504,
     "category": "Cakes",
-    "name": "Chocolate Pastry",
+    "name": "Chocolate Pastry (ಚಾಕೊಲೇಟ್ ಪೇಸ್ಟ್ರಿ)",
     "price": 55,
     "rating": 4.85,
     "isVeg": true,
@@ -483,7 +479,7 @@
   {
     "id": 505,
     "category": "Cakes",
-    "name": "Special Honey Cake (Piece)",
+    "name": "Special Honey Cake (Piece) (ಸ್ಪೆಷಲ್ ಹನಿ ಕೇಕ್)",
     "price": 20,
     "rating": 4.8,
     "isVeg": true,
@@ -496,7 +492,7 @@
   {
     "id": 506,
     "category": "Cakes",
-    "name": "Pineapple Cake Piece",
+    "name": "Pineapple Cake Piece (ಪೈನಾಪಲ್ ಕೇಕ್)",
     "price": 40,
     "rating": 4.75,
     "isVeg": true,
@@ -508,7 +504,7 @@
   {
     "id": 507,
     "category": "Cakes",
-    "name": "Black Forest Pastry Piece",
+    "name": "Black Forest Pastry Piece (ಬ್ಲ್ಯಾಕ್ ಫಾರೆಸ್ಟ್ ಪೇಸ್ಟ್ರಿ)",
     "price": 40,
     "rating": 4.85,
     "isVeg": true,
@@ -521,7 +517,7 @@
   {
     "id": 508,
     "category": "Cakes",
-    "name": "Red Velvet Pastry",
+    "name": "Red Velvet Pastry (ರೆಡ್ ವೆಲ್ವೆಟ್ ಪೇಸ್ಟ್ರಿ)",
     "price": 40,
     "rating": 4.85,
     "isVeg": true,
@@ -533,7 +529,7 @@
   {
     "id": 509,
     "category": "Cakes",
-    "name": "Hot Truffle Pastry",
+    "name": "Hot Truffle Pastry (ಹಾಟ್ ಟ್ರಫಲ್ ಪೇಸ್ಟ್ರಿ)",
     "price": 50,
     "rating": 4.9,
     "isVeg": true,
@@ -546,7 +542,7 @@
   {
     "id": 510,
     "category": "Cakes",
-    "name": "Hazelnut Pastry",
+    "name": "Hazelnut Pastry (ಹ್ಯಾಝಲ್‌ನಟ್ ಪೇಸ್ಟ್ರಿ)",
     "price": 60,
     "rating": 4.85,
     "isVeg": true,
@@ -558,7 +554,7 @@
   {
     "id": 511,
     "category": "Cakes",
-    "name": "London Chocolate Caramel",
+    "name": "London Chocolate Caramel (ಲಂಡನ್ ಚಾಕೊಲೇಟ್ ಕ್ಯಾರಮೆಲ್)",
     "price": 60,
     "rating": 4.9,
     "isVeg": true,
@@ -571,7 +567,7 @@
   {
     "id": 512,
     "category": "Cakes",
-    "name": "Kunafa Cake (Piece)",
+    "name": "Kunafa Cake (Piece) (ಕುನಾಫಾ ಕೇಕ್)",
     "price": 100,
     "rating": 4.95,
     "isVeg": true,
@@ -584,7 +580,7 @@
   {
     "id": 513,
     "category": "Cakes",
-    "name": "Blueberry Cheesecake",
+    "name": "Blueberry Cheesecake (ಬ್ಲೂಬೆರ್ರಿ ಚೀಸ್‌ಕೇಕ್)",
     "price": 60,
     "rating": 4.9,
     "isVeg": true,
@@ -597,7 +593,7 @@
   {
     "id": 514,
     "category": "Cakes",
-    "name": "Biscoff Cheesecake",
+    "name": "Biscoff Cheesecake (ಬಿಸ್ಕಾಫ್ ಚೀಸ್‌ಕೇಕ್)",
     "price": 70,
     "rating": 4.92,
     "isVeg": true,
@@ -610,7 +606,7 @@
   {
     "id": 515,
     "category": "Cakes",
-    "name": "Mango Tres Leches Cake",
+    "name": "Mango Tres Leches Cake (ಮ್ಯಾಂಗೋ ಟ್ರೆಸ್ ಲೇಚೆಸ್ ಕೇಕ್)",
     "price": 70,
     "rating": 4.88,
     "isVeg": true,
@@ -622,7 +618,7 @@
   {
     "id": 516,
     "category": "Cakes",
-    "name": "Vanilla Tres Leches Cake",
+    "name": "Vanilla Tres Leches Cake (ವೆನಿಲಾ ಟ್ರೆಸ್ ಲೇಚೆಸ್ ಕೇಕ್)",
     "price": 60,
     "rating": 4.8,
     "isVeg": true,
@@ -634,7 +630,7 @@
   {
     "id": 517,
     "category": "Cakes",
-    "name": "Rasmalai Tres Leches Cake",
+    "name": "Rasmalai Tres Leches Cake (ರಸಮಲೈ ಟ್ರೆಸ್ ಲೇಚೆಸ್ ಕೇಕ್)",
     "price": 80,
     "rating": 4.95,
     "isVeg": true,
@@ -647,7 +643,7 @@
   {
     "id": 518,
     "category": "Cakes",
-    "name": "Choco Mousse",
+    "name": "Choco Mousse (ಚೊಕೊ ಮೂಸ್)",
     "price": 40,
     "rating": 4.85,
     "isVeg": true,
@@ -659,7 +655,7 @@
   {
     "id": 519,
     "category": "Cakes",
-    "name": "Mango Mousse",
+    "name": "Mango Mousse (ಮ್ಯಾಂಗೋ ಮೂಸ್)",
     "price": 40,
     "rating": 4.8,
     "isVeg": true,
@@ -671,7 +667,7 @@
   {
     "id": 520,
     "category": "Cakes",
-    "name": "Strawberry Donut",
+    "name": "Strawberry Donut (ಸ್ಟ್ರಾಬೆರಿ ಡೋನಟ್)",
     "price": 40,
     "rating": 4.75,
     "isVeg": true,
@@ -683,7 +679,7 @@
   {
     "id": 521,
     "category": "Cakes",
-    "name": "Chocolate Donut",
+    "name": "Chocolate Donut (ಚಾಕೊಲೇಟ್ ಡೋನಟ್)",
     "price": 40,
     "rating": 4.85,
     "isVeg": true,
@@ -696,7 +692,7 @@
   {
     "id": 522,
     "category": "Cakes",
-    "name": "Choco Lava Cake",
+    "name": "Choco Lava Cake (ಚೊಕೊ ಲಾವಾ ಕೇಕ್)",
     "price": 40,
     "rating": 4.9,
     "isVeg": true,
@@ -709,7 +705,7 @@
   {
     "id": 523,
     "category": "Cakes",
-    "name": "Peanut Chocolate Slice",
+    "name": "Peanut Chocolate Slice (ಪೀನಟ್ ಚಾಕೊಲೇಟ್ ಸ್ಲೈಸ್)",
     "price": 40,
     "rating": 4.7,
     "isVeg": true,
@@ -721,7 +717,7 @@
   {
     "id": 524,
     "category": "Cakes",
-    "name": "Vanilla Cupcake",
+    "name": "Vanilla Cupcake (ವೆನಿಲಾ ಕಪ್‌ಕೇಕ್)",
     "price": 6,
     "rating": 4.7,
     "isVeg": true,
@@ -734,7 +730,7 @@
   {
     "id": 525,
     "category": "Cakes",
-    "name": "Chocolate Cupcake",
+    "name": "Chocolate Cupcake (ಚಾಕೊಲೇಟ್ ಕಪ್‌ಕೇಕ್)",
     "price": 6,
     "rating": 4.75,
     "isVeg": true,
@@ -747,7 +743,7 @@
   {
     "id": 526,
     "category": "Cakes",
-    "name": "Plain Cake",
+    "name": "Plain Cake (ಪ್ಲೇನ್ ಕೇಕ್)",
     "price": 70,
     "rating": 4.65,
     "isVeg": true,
@@ -759,7 +755,7 @@
   {
     "id": 527,
     "category": "Cakes",
-    "name": "Plum Cake",
+    "name": "Plum Cake (ಪ್ಲಮ್ ಕೇಕ್)",
     "price": 100,
     "rating": 4.9,
     "isVeg": true,
@@ -772,7 +768,7 @@
   {
     "id": 528,
     "category": "Cakes",
-    "name": "Fruit Cake",
+    "name": "Fruit Cake (ಫ್ರೂಟ್ ಕೇಕ್)",
     "price": 80,
     "rating": 4.8,
     "isVeg": true,
@@ -784,7 +780,7 @@
   {
     "id": 529,
     "category": "Cakes",
-    "name": "Rava Cake",
+    "name": "Rava Cake (ರವಾ ಕೇಕ್)",
     "price": 100,
     "rating": 4.85,
     "isVeg": true,
@@ -794,11 +790,10 @@
     "image": "https://images.unsplash.com/photo-1519869325930-281384150729?w=600&auto=format&fit=crop&q=80",
     "description": "Traditional semolina cake baked with pure ghee, cardamom, and cashews."
   },
-
   {
     "id": 601,
     "category": "Birthday Cakes",
-    "name": "Black Forest Cake",
+    "name": "Black Forest Cake (ಬ್ಲ್ಯಾಕ್ ಫಾರೆಸ್ಟ್ ಕೇಕ್)",
     "price": 450,
     "rating": 4.95,
     "isVeg": true,
@@ -811,7 +806,7 @@
   {
     "id": 602,
     "category": "Birthday Cakes",
-    "name": "Chocolate Truffle",
+    "name": "Chocolate Truffle (ಚಾಕೊಲೇಟ್ ಟ್ರಫಲ್)",
     "price": 550,
     "rating": 4.9,
     "isVeg": true,
@@ -824,7 +819,7 @@
   {
     "id": 603,
     "category": "Birthday Cakes",
-    "name": "Butterscotch Cake",
+    "name": "Butterscotch Cake (ಬಟರ್‌ಸ್ಕಾಚ್ ಕೇಕ್)",
     "price": 480,
     "rating": 4.8,
     "isVeg": true,
@@ -836,7 +831,7 @@
   {
     "id": 604,
     "category": "Birthday Cakes",
-    "name": "Red Velvet Cake",
+    "name": "Red Velvet Cake (ರೆಡ್ ವೆಲ್ವೆಟ್ ಕೇಕ್)",
     "price": 600,
     "rating": 4.95,
     "isVeg": true,
@@ -846,11 +841,10 @@
     "image": "https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=600&auto=format&fit=crop&q=80",
     "description": "1 Kg luxurious crimson red cocoa sponge layered with smooth cream cheese frosting."
   },
-
   {
     "id": 701,
     "category": "Biscuits",
-    "name": "Butter Cookies (250g)",
+    "name": "Butter Cookies (250g) (ಬಟರ್ ಬಿಸ್ಕತ್ತು)",
     "price": 100,
     "rating": 4.8,
     "isVeg": true,
@@ -863,7 +857,7 @@
   {
     "id": 702,
     "category": "Biscuits",
-    "name": "Jeera Biscuits (250g)",
+    "name": "Jeera Biscuits (250g) (ಜೀರ ಬಿಸ್ಕತ್ತು)",
     "price": 90,
     "rating": 4.75,
     "isVeg": true,
@@ -875,7 +869,7 @@
   {
     "id": 703,
     "category": "Biscuits",
-    "name": "Cashew Cookies (250g)",
+    "name": "Cashew Cookies (250g) (ಗೋಡಂಬಿ ಬಿಸ್ಕತ್ತು)",
     "price": 130,
     "rating": 4.9,
     "isVeg": true,
@@ -887,7 +881,7 @@
   {
     "id": 704,
     "category": "Biscuits",
-    "name": "Osmania Biscuits (250g)",
+    "name": "Osmania Biscuits (250g) (ಉಸ್ಮಾನಿಯಾ ಬಿಸ್ಕತ್ತು)",
     "price": 95,
     "rating": 4.85,
     "isVeg": true,
@@ -900,7 +894,7 @@
   {
     "id": 705,
     "category": "Biscuits",
-    "name": "Jam Badam Cookies",
+    "name": "Jam Badam Cookies (ಜಾಮ್ ಬಾದಾಮ್ ಬಿಸ್ಕತ್ತು)",
     "price": 100,
     "rating": 4.85,
     "isVeg": true,
@@ -913,7 +907,7 @@
   {
     "id": 706,
     "category": "Biscuits",
-    "name": "Special Rusk",
+    "name": "Special Rusk (ಸ್ಪೆಷಲ್ ರಸ್ಕ್)",
     "price": 100,
     "rating": 4.8,
     "isVeg": true,
@@ -925,7 +919,7 @@
   {
     "id": 707,
     "category": "Biscuits",
-    "name": "Jaggery Ragi Biscuit",
+    "name": "Jaggery Ragi Biscuit (ಬೆಲ್ಲ ರಾಗಿ ಬಿಸ್ಕತ್ತು)",
     "price": 100,
     "rating": 4.75,
     "isVeg": true,
@@ -938,7 +932,7 @@
   {
     "id": 708,
     "category": "Biscuits",
-    "name": "Butter Biscuit",
+    "name": "Butter Biscuit (ಬಟರ್ ಬಿಸ್ಕತ್ತು)",
     "price": 100,
     "rating": 4.8,
     "isVeg": true,
@@ -950,7 +944,7 @@
   {
     "id": 709,
     "category": "Biscuits",
-    "name": "Butter Badam Biscuit",
+    "name": "Butter Badam Biscuit (ಬಟರ್ ಬಾದಾಮ್ ಬಿಸ್ಕತ್ತು)",
     "price": 100,
     "rating": 4.85,
     "isVeg": true,
@@ -962,7 +956,7 @@
   {
     "id": 710,
     "category": "Biscuits",
-    "name": "Coconut Cookies (200g)",
+    "name": "Coconut Cookies (200g) (ಕೋಕೊನಟ್ ಬಿಸ್ಕತ್ತು)",
     "price": 100,
     "rating": 4.8,
     "isVeg": true,
@@ -974,7 +968,7 @@
   {
     "id": 711,
     "category": "Biscuits",
-    "name": "Salt Biscuit",
+    "name": "Salt Biscuit (ಸಾಲ್ಟ್ ಬಿಸ್ಕತ್ತು)",
     "price": 100,
     "rating": 4.7,
     "isVeg": true,
@@ -986,7 +980,7 @@
   {
     "id": 712,
     "category": "Biscuits",
-    "name": "Sweet & Salt Biscuits",
+    "name": "Sweet & Salt Biscuits (ಸ್ವೀಟ್ & ಸಾಲ್ಟ್ ಬಿಸ್ಕತ್ತು)",
     "price": 100,
     "rating": 4.75,
     "isVeg": true,
@@ -998,7 +992,7 @@
   {
     "id": 713,
     "category": "Biscuits",
-    "name": "Masala Biscuit",
+    "name": "Masala Biscuit (ಮಸಾಲ ಬಿಸ್ಕತ್ತು)",
     "price": 100,
     "rating": 4.8,
     "isVeg": true,
@@ -1011,7 +1005,7 @@
   {
     "id": 714,
     "category": "Biscuits",
-    "name": "Choco Nuts Biscuit",
+    "name": "Choco Nuts Biscuit (ಚೊಕೊ ನಟ್ಸ್ ಬಿಸ್ಕತ್ತು)",
     "price": 120,
     "rating": 4.9,
     "isVeg": true,
@@ -1024,7 +1018,7 @@
   {
     "id": 715,
     "category": "Biscuits",
-    "name": "Fruit Biscuit",
+    "name": "Fruit Biscuit (ಫ್ರೂಟ್ ಬಿಸ್ಕತ್ತು)",
     "price": 120,
     "rating": 4.85,
     "isVeg": true,
@@ -1036,7 +1030,7 @@
   {
     "id": 716,
     "category": "Biscuits",
-    "name": "Pista Goodday Biscuit",
+    "name": "Pista Goodday Biscuit (ಪಿಸ್ತಾ ಗುಡ್‌ಡೇ ಬಿಸ್ಕತ್ತು)",
     "price": 120,
     "rating": 4.85,
     "isVeg": true,
@@ -1048,7 +1042,7 @@
   {
     "id": 717,
     "category": "Biscuits",
-    "name": "Peanut Badam Biscuit",
+    "name": "Peanut Badam Biscuit (ಪೀನಟ್ ಬಾದಾಮ್ ಬಿಸ್ಕತ್ತು)",
     "price": 120,
     "rating": 4.8,
     "isVeg": true,
@@ -1060,7 +1054,7 @@
   {
     "id": 718,
     "category": "Biscuits",
-    "name": "Butter Coconut Biscuit",
+    "name": "Butter Coconut Biscuit (ಬಟರ್ ಕೋಕೊನಟ್ ಬಿಸ್ಕತ್ತು)",
     "price": 120,
     "rating": 4.8,
     "isVeg": true,
@@ -1072,7 +1066,7 @@
   {
     "id": 719,
     "category": "Biscuits",
-    "name": "Besan Biscuit",
+    "name": "Besan Biscuit (ಬೇಸನ್ ಬಿಸ್ಕತ್ತು)",
     "price": 120,
     "rating": 4.85,
     "isVeg": true,
@@ -1085,7 +1079,7 @@
   {
     "id": 720,
     "category": "Biscuits",
-    "name": "Pista Biscuit",
+    "name": "Pista Biscuit (ಪಿಸ್ತಾ ಬಿಸ್ಕತ್ತು)",
     "price": 120,
     "rating": 4.85,
     "isVeg": true,
@@ -1097,7 +1091,7 @@
   {
     "id": 721,
     "category": "Biscuits",
-    "name": "Chocolate Cashew Biscuit",
+    "name": "Chocolate Cashew Biscuit (ಚಾಕೊಲೇಟ್ ಗೋಡಂಬಿ ಬಿಸ್ಕತ್ತು)",
     "price": 120,
     "rating": 4.9,
     "isVeg": true,
@@ -1110,7 +1104,7 @@
   {
     "id": 722,
     "category": "Biscuits",
-    "name": "Cashew Biscuit",
+    "name": "Cashew Biscuit (ಗೋಡಂಬಿ ಬಿಸ್ಕತ್ತು)",
     "price": 120,
     "rating": 4.85,
     "isVeg": true,
@@ -1122,7 +1116,7 @@
   {
     "id": 723,
     "category": "Biscuits",
-    "name": "Milk Rusk",
+    "name": "Milk Rusk (ಮಿಲ್ಕ್ ರಸ್ಕ್)",
     "price": 60,
     "rating": 4.75,
     "isVeg": true,
@@ -1134,7 +1128,7 @@
   {
     "id": 724,
     "category": "Biscuits",
-    "name": "Garlic Rusk",
+    "name": "Garlic Rusk (ಗಾರ್ಲಿಕ್ ರಸ್ಕ್)",
     "price": 100,
     "rating": 4.8,
     "isVeg": true,
@@ -1146,7 +1140,7 @@
   {
     "id": 725,
     "category": "Biscuits",
-    "name": "Om Biscuits (Ajwain)",
+    "name": "Om Biscuits (Ajwain) (ಓಂ ಕಾಳು ಬಿಸ್ಕತ್ತು)",
     "price": 60,
     "rating": 4.8,
     "isVeg": true,
@@ -1156,11 +1150,10 @@
     "image": "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=600&auto=format&fit=crop&q=80",
     "description": "Savory tea time biscuits flavored with digestive ajwain (carom seeds)."
   },
-
   {
     "id": 801,
     "category": "Snacks",
-    "name": "Special Nipattu (200g)",
+    "name": "Special Nipattu (200g) (ಸ್ಪೆಷಲ್ ನಿಪ್ಪಟ್ಟು)",
     "price": 60,
     "rating": 4.85,
     "isVeg": true,
@@ -1173,7 +1166,7 @@
   {
     "id": 802,
     "category": "Snacks",
-    "name": "Butter Kodubale (200g)",
+    "name": "Butter Kodubale (200g) (ಬೆಣ್ಣೆ ಕೋಡುಬಳೆ)",
     "price": 65,
     "rating": 4.8,
     "isVeg": true,
@@ -1185,7 +1178,7 @@
   {
     "id": 803,
     "category": "Snacks",
-    "name": "Special Mixture (200g)",
+    "name": "Special Mixture (200g) (ಸ್ಪೆಷಲ್ ಮಿಕ್ಸ್‌ಚರ್)",
     "price": 55,
     "rating": 4.75,
     "isVeg": true,
@@ -1197,7 +1190,7 @@
   {
     "id": 804,
     "category": "Snacks",
-    "name": "Salted Potato Chips (150g)",
+    "name": "Salted Potato Chips (150g) (ಸಾಲ್ಟೆಡ್ ಆಲೂ ಚಿಪ್ಸ್)",
     "price": 40,
     "rating": 4.7,
     "isVeg": true,
@@ -1209,7 +1202,7 @@
   {
     "id": 805,
     "category": "Snacks",
-    "name": "Banana Chips",
+    "name": "Banana Chips (ಬಾಳೆಹಣ್ಣಿನ ಚಿಪ್ಸ್)",
     "price": 100,
     "rating": 4.85,
     "isVeg": true,
@@ -1222,7 +1215,7 @@
   {
     "id": 806,
     "category": "Snacks",
-    "name": "Spicy Banana Chips",
+    "name": "Spicy Banana Chips (ಖಾರ ಬಾಳೆಹಣ್ಣಿನ ಚಿಪ್ಸ್)",
     "price": 100,
     "rating": 4.85,
     "isVeg": true,
@@ -1235,7 +1228,7 @@
   {
     "id": 807,
     "category": "Snacks",
-    "name": "Potato Chips",
+    "name": "Potato Chips (ಆಲೂಗೆಡ್ಡೆ ಚಿಪ್ಸ್)",
     "price": 80,
     "rating": 4.75,
     "isVeg": true,
@@ -1247,7 +1240,7 @@
   {
     "id": 808,
     "category": "Snacks",
-    "name": "Spicy Chilli Potato Chips",
+    "name": "Spicy Chilli Potato Chips (ಖಾರ ಆಲೂ ಚಿಪ್ಸ್)",
     "price": 80,
     "rating": 4.8,
     "isVeg": true,
@@ -1260,7 +1253,7 @@
   {
     "id": 809,
     "category": "Snacks",
-    "name": "Khari Puff Biscuits",
+    "name": "Khari Puff Biscuits (ಖಾರಿ ಪಫ್ ಬಿಸ್ಕತ್ತು)",
     "price": 70,
     "rating": 4.8,
     "isVeg": true,
@@ -1272,7 +1265,7 @@
   {
     "id": 810,
     "category": "Snacks",
-    "name": "Kodubale",
+    "name": "Kodubale (ಕೋಡುಬಳೆ)",
     "price": 60,
     "rating": 4.85,
     "isVeg": true,
@@ -1285,7 +1278,7 @@
   {
     "id": 811,
     "category": "Snacks",
-    "name": "Nippattu",
+    "name": "Nippattu (ನಿಪ್ಪಟ್ಟು)",
     "price": 50,
     "rating": 4.8,
     "isVeg": true,
@@ -1297,7 +1290,7 @@
   {
     "id": 812,
     "category": "Snacks",
-    "name": "Big Kodubale Pack (10 Pcs)",
+    "name": "Big Kodubale Pack (10 Pcs) (ದೊಡ್ಡ ಕೋಡುಬಳೆ)",
     "price": 50,
     "rating": 4.85,
     "isVeg": true,
@@ -1310,7 +1303,7 @@
   {
     "id": 813,
     "category": "Snacks",
-    "name": "Kaayi Holige",
+    "name": "Kaayi Holige (ಕಾಯಿ ಹೋಳಿಗೆ)",
     "price": 100,
     "rating": 4.95,
     "isVeg": true,
@@ -1323,7 +1316,7 @@
   {
     "id": 814,
     "category": "Snacks",
-    "name": "Khara Rotti",
+    "name": "Khara Rotti (ಖಾರ ರೊಟ್ಟಿ)",
     "price": 50,
     "rating": 4.75,
     "isVeg": true,
@@ -1335,7 +1328,7 @@
   {
     "id": 815,
     "category": "Snacks",
-    "name": "Chakkli (200g)",
+    "name": "Chakkli (200g) (ಚಕ್ಕುಲಿ)",
     "price": 60,
     "rating": 4.85,
     "isVeg": true,
@@ -1347,7 +1340,7 @@
   {
     "id": 816,
     "category": "Snacks",
-    "name": "Benne Murukku",
+    "name": "Benne Murukku (ಬೆಣ್ಣೆ ಮುರುಕು)",
     "price": 60,
     "rating": 4.9,
     "isVeg": true,
@@ -1357,11 +1350,10 @@
     "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format&fit=crop&q=80",
     "description": "Melt-in-mouth savory butter murukku sticks made with pure fresh butter."
   },
-
   {
     "id": 901,
     "category": "Drinks",
-    "name": "Fresh Sweet Lassi",
+    "name": "Fresh Sweet Lassi (ಫ್ರೆಶ್ ಸ್ವೀಟ್ ಲಸ್ಸಿ)",
     "price": 40,
     "rating": 4.85,
     "isVeg": true,
@@ -1374,7 +1366,7 @@
   {
     "id": 902,
     "category": "Drinks",
-    "name": "Spiced Masala Buttermilk",
+    "name": "Spiced Masala Buttermilk (ಮಸಾಲ ಮಜ್ಜಿಗೆ)",
     "price": 25,
     "rating": 4.8,
     "isVeg": true,
@@ -1387,7 +1379,7 @@
   {
     "id": 903,
     "category": "Drinks",
-    "name": "Cold Mineral Water (1L)",
+    "name": "Cold Mineral Water (1L) (ಕೋಲ್ಡ್ ಮಿನರಲ್ ವಾಟರ್)",
     "price": 20,
     "rating": 4.5,
     "isVeg": true,
@@ -1399,7 +1391,7 @@
   {
     "id": 904,
     "category": "Drinks",
-    "name": "Soft Drink Can (330ml)",
+    "name": "Soft Drink Can (330ml) (ಸಾಫ್ಟ್ ಡ್ರಿಂಕ್ ಕ್ಯಾನ್)",
     "price": 40,
     "rating": 4.6,
     "isVeg": true,

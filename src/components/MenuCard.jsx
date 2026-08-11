@@ -50,7 +50,7 @@ export default function MenuCard({ item, onItemClick, quantity = 0, onUpdateQuan
         </div>
 
         {/* Item Title */}
-        <h3 className="font-heading font-bold text-sm sm:text-base text-bakery-text group-hover:text-bakery-price transition-colors truncate">
+        <h3 className="font-heading font-bold text-sm sm:text-base text-bakery-text group-hover:text-bakery-price transition-colors line-clamp-2 leading-snug">
           {item.name}
         </h3>
 
