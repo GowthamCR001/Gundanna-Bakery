@@ -1,10 +1,25 @@
 import React from 'react';
-import { X, Star, CheckCircle, Share2, Clock, ShieldCheck, Plus, Minus, ShoppingBag } from 'lucide-react';
+import { X, Star, Share2, Clock, ShieldCheck, Plus, Minus, ShoppingBag, Cake, Edit3 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import bakeryInfo from '../data/bakeryInfo.json';
 
-export default function ItemDetailModal({ item, onClose, quantity = 0, onUpdateQuantity }) {
+const OCCASION_OPTIONS = [
+  { id: 'Birthday', label: 'Birthday 🎂' },
+  { id: 'Anniversary', label: 'Anniversary 💍' },
+  { id: 'Wedding Cake', label: 'Wedding Cake 💒' },
+  { id: 'Housewarming', label: 'Housewarming 🏡' },
+  { id: 'Baby Shower', label: 'Baby Shower 🎈' },
+  { id: 'Special Celebration', label: 'Celebration 🎉' }
+];
+
+export default function ItemDetailModal({ item, onClose, quantity = 0, customization = {}, onUpdateQuantity, onUpdateCustomization }) {
   if (!item) return null;
+
+  const isCake = () => {
+    const cat = (item.category || '').toLowerCase();
+    const name = (item.name || '').toLowerCase();
+    return cat.includes('cake') || name.includes('cake') || cat === 'specials';
+  };
 
   const handleShare = () => {
     if (navigator.share) {
@@ -29,6 +44,17 @@ export default function ItemDetailModal({ item, onClose, quantity = 0, onUpdateQ
 
   const handlePlus = () => {
     if (onUpdateQuantity) onUpdateQuantity(item, quantity + 1);
+  };
+
+  const cust = customization || {};
+
+  const handleCustChange = (field, value) => {
+    if (onUpdateCustomization) {
+      onUpdateCustomization(item.id, { [field]: value });
+    }
+    if (quantity === 0 && onUpdateQuantity) {
+      onUpdateQuantity(item, 1);
+    }
   };
 
   return (
@@ -60,7 +86,7 @@ export default function ItemDetailModal({ item, onClose, quantity = 0, onUpdateQ
           </button>
 
           {/* Large Header Image */}
-          <div className="relative w-full h-64 sm:h-72 bg-amber-50 shrink-0">
+          <div className="relative w-full h-60 sm:h-64 bg-amber-50 shrink-0">
             <img
               src={item.image}
               alt={item.name}
@@ -126,6 +152,83 @@ export default function ItemDetailModal({ item, onClose, quantity = 0, onUpdateQ
                 {item.description}
               </p>
             </div>
+
+            {/* Cake Customization Box (For Cakes & Specials) */}
+            {isCake() && (
+              <div className="p-3.5 bg-amber-50/90 rounded-2xl border-2 border-amber-200 space-y-3">
+                <div className="flex items-center gap-1.5 text-xs font-black text-amber-900 border-b border-amber-200 pb-1.5 uppercase tracking-wider">
+                  <Cake className="w-4 h-4 text-bakery-price" />
+                  <span>Customize Cake Order (Name, Date & Occasion)</span>
+                </div>
+
+                {/* 1. Occasion Selector */}
+                <div>
+                  <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                    Occasion Type:
+                  </label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {OCCASION_OPTIONS.map((occ) => {
+                      const isSelected = cust.occasion === occ.id;
+                      return (
+                        <button
+                          key={occ.id}
+                          type="button"
+                          onClick={() => handleCustChange('occasion', occ.id)}
+                          className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border transition-all ${
+                            isSelected
+                              ? 'bg-amber-600 text-white border-amber-600 shadow-xs'
+                              : 'bg-white text-slate-700 border-slate-200 hover:bg-amber-100'
+                          }`}
+                        >
+                          {occ.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* 2. Name on Cake */}
+                <div>
+                  <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                    Name / Text to Write on Cake:
+                  </label>
+                  <input
+                    type="text"
+                    value={cust.nameOnCake || ''}
+                    onChange={(e) => handleCustChange('nameOnCake', e.target.value)}
+                    placeholder="e.g. Happy Birthday Rahul!"
+                    className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-amber-500 bg-white font-medium"
+                  />
+                </div>
+
+                {/* 3. Event / Delivery Date */}
+                <div>
+                  <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                    Date of Celebration / Delivery:
+                  </label>
+                  <input
+                    type="date"
+                    value={cust.eventDate || ''}
+                    onChange={(e) => handleCustChange('eventDate', e.target.value)}
+                    className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-amber-500 bg-white font-medium text-slate-800"
+                  />
+                </div>
+
+                {/* 4. Special Notes */}
+                <div>
+                  <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                    Special Notes / Instructions:
+                  </label>
+                  <input
+                    type="text"
+                    value={cust.notes || ''}
+                    onChange={(e) => handleCustChange('notes', e.target.value)}
+                    placeholder="e.g. Eggless, write in dark chocolate, 5 PM pickup"
+                    className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-amber-500 bg-white font-medium"
+                  />
+                </div>
+              </div>
+            )}
 
             {/* Quality & Freshness Guarantee */}
             <div className="grid grid-cols-2 gap-2 text-xs">

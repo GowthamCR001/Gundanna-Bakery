@@ -77,13 +77,17 @@ export default function Home() {
   }, []);
 
   // Update quantity in selection list
-  const handleUpdateQuantity = (targetItem, newQuantity) => {
+  const handleUpdateQuantity = (targetItemOrId, newQuantity) => {
     setMyList((prev) => {
-      const existsIndex = prev.findIndex((entry) => entry.item.id === targetItem.id);
+      const targetId = typeof targetItemOrId === 'object' && targetItemOrId !== null 
+        ? targetItemOrId.id 
+        : targetItemOrId;
+      
+      const existsIndex = prev.findIndex((entry) => entry.item && entry.item.id === targetId);
       
       if (newQuantity <= 0) {
         // Remove item if quantity <= 0
-        return prev.filter((entry) => entry.item.id !== targetItem.id);
+        return prev.filter((entry) => entry.item && entry.item.id !== targetId);
       }
 
       if (existsIndex >= 0) {
@@ -91,15 +95,40 @@ export default function Home() {
         const copy = [...prev];
         copy[existsIndex] = { ...copy[existsIndex], quantity: newQuantity };
         return copy;
-      } else {
+      } else if (typeof targetItemOrId === 'object' && targetItemOrId !== null) {
         // Add new item to list
-        return [...prev, { item: targetItem, quantity: newQuantity }];
+        return [...prev, { item: targetItemOrId, quantity: newQuantity }];
+      } else {
+        // Fallback: find item in menuData by ID
+        const foundItem = menuData.find((item) => item.id === targetId);
+        if (foundItem) {
+          return [...prev, { item: foundItem, quantity: newQuantity }];
+        }
+        return prev;
       }
     });
   };
 
   const clearList = () => {
     setMyList([]);
+  };
+
+  // Update customization details (Occasion, Name on Cake, Date, Notes)
+  const handleUpdateCustomization = (itemId, customizationData) => {
+    setMyList((prev) => {
+      return prev.map((entry) => {
+        if (entry.item && entry.item.id === itemId) {
+          return {
+            ...entry,
+            customization: {
+              ...entry.customization,
+              ...customizationData
+            }
+          };
+        }
+        return entry;
+      });
+    });
   };
 
   // Map of itemId -> quantity for fast UI lookup
@@ -345,6 +374,7 @@ export default function Home() {
         onClose={() => setIsListDrawerOpen(false)}
         myList={myList}
         updateQuantity={handleUpdateQuantity}
+        updateCustomization={handleUpdateCustomization}
         clearList={clearList}
       />
 
@@ -364,7 +394,9 @@ export default function Home() {
         item={selectedItem}
         onClose={() => setSelectedItem(null)}
         quantity={selectedItem ? (myListMap[selectedItem.id] || 0) : 0}
+        customization={selectedItem ? (myList.find((e) => e.item.id === selectedItem.id)?.customization || null) : null}
         onUpdateQuantity={handleUpdateQuantity}
+        onUpdateCustomization={handleUpdateCustomization}
       />
 
       {/* QR Code Share Modal */}
