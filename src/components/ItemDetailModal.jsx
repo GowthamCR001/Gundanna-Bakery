@@ -1,7 +1,8 @@
-import React from 'react';
-import { X, Star, Share2, Clock, ShieldCheck, Plus, Minus, ShoppingBag, Cake, Edit3 } from 'lucide-react';
+import React, { useState } from 'react';
+import { X, Star, Share2, Clock, ShieldCheck, Plus, Minus, ShoppingBag, Cake, Edit3, Maximize2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import bakeryInfo from '../data/bakeryInfo.json';
+import FullScreenImageViewer from './FullScreenImageViewer';
 
 const OCCASION_OPTIONS = [
   { id: 'Birthday', label: 'Birthday 🎂' },
@@ -13,6 +14,8 @@ const OCCASION_OPTIONS = [
 ];
 
 export default function ItemDetailModal({ item, onClose, quantity = 0, customization = {}, onUpdateQuantity, onUpdateCustomization }) {
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
   if (!item) return null;
 
   const isCake = () => {
@@ -85,19 +88,30 @@ export default function ItemDetailModal({ item, onClose, quantity = 0, customiza
           </button>
 
           {/* Large Header Image */}
-          <div className="relative w-full h-60 sm:h-64 bg-amber-50 shrink-0">
+          <div
+            onClick={() => setIsFullScreen(true)}
+            className="relative w-full h-60 sm:h-64 bg-amber-50 shrink-0 cursor-pointer group overflow-hidden"
+            title="Click to view full screen image"
+          >
             <img
               src={item.image}
               alt={item.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               onError={(e) => {
                 e.target.src = 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80';
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
 
+            {/* Hover Expand Overlay Hint */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 backdrop-blur-[1px]">
+              <span className="bg-black/75 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg border border-white/20">
+                <Maximize2 className="w-3.5 h-3.5 text-amber-400" /> Click to view full screen
+              </span>
+            </div>
+
             {/* Badges Overlay */}
-            <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white">
+            <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white pointer-events-none">
               <div className="flex items-center gap-2">
                 <span className="bg-bakery-price text-white text-xs font-extrabold px-3 py-1 rounded-full shadow">
                   {item.category}
@@ -115,6 +129,15 @@ export default function ItemDetailModal({ item, onClose, quantity = 0, customiza
               </div>
             </div>
           </div>
+
+          {/* Full Screen Image Modal */}
+          {isFullScreen && (
+            <FullScreenImageViewer
+              src={item.image}
+              alt={item.name}
+              onClose={() => setIsFullScreen(false)}
+            />
+          )}
 
           {/* Scrollable Content */}
           <div className="p-5 overflow-y-auto space-y-4">
