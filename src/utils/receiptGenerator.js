@@ -3,7 +3,7 @@ import { generateOrderChecksum } from './orderHash';
 
 /**
  * Generates an ultra-high-resolution (3x Retina HD) uneditable PNG receipt image using HTML5 Canvas.
- * Rendered at 1920px width for crystal clear text readability on all mobile & desktop screens.
+ * Rendered at 1920px width with clean alignments and compulsory WhatsApp order confirmation notice.
  */
 export function generateReceiptImage(myList) {
   if (!Array.isArray(myList) || myList.length === 0) return null;
@@ -16,7 +16,7 @@ export function generateReceiptImage(myList) {
     timeStyle: 'short'
   });
 
-  // Calculate dynamic line count
+  // Calculate dynamic line count for customization notes
   let extraLines = 0;
   myList.forEach((entry) => {
     if (entry.customization) {
@@ -28,9 +28,10 @@ export function generateReceiptImage(myList) {
   // Base Logical dimensions
   const logicalWidth = 640;
   const itemHeight = 44;
-  const logicalHeight = Math.max(540, 360 + myList.length * itemHeight + extraLines * 24);
+  // Extra space for compulsory notice footer box
+  const logicalHeight = Math.max(620, 440 + myList.length * itemHeight + extraLines * 24);
 
-  // High Resolution Scale Factor (3x Retina)
+  // High Resolution Scale Factor (3x Retina HD)
   const scale = 3;
 
   const canvas = document.createElement('canvas');
@@ -40,17 +41,17 @@ export function generateReceiptImage(myList) {
   const ctx = canvas.getContext('2d');
   ctx.scale(scale, scale);
 
-  // Background - Clean Cream / White
+  // Background - Clean Warm Cream
   ctx.fillStyle = '#FAF9F6';
   ctx.fillRect(0, 0, logicalWidth, logicalHeight);
 
-  // Outer Border
+  // Outer Double Border
   ctx.strokeStyle = '#D97706';
   ctx.lineWidth = 3;
   ctx.strokeRect(12, 12, logicalWidth - 24, logicalHeight - 24);
 
   ctx.strokeStyle = '#FDE68A';
-  ctx.lineWidth = 1;
+  ctx.lineWidth = 1.5;
   ctx.strokeRect(16, 16, logicalWidth - 32, logicalHeight - 32);
 
   // Top Header Banner Gradient
@@ -61,26 +62,26 @@ export function generateReceiptImage(myList) {
   ctx.fillStyle = gradient;
   ctx.fillRect(18, 18, logicalWidth - 36, 115);
 
-  // Header Title & Logo Text
+  // Header Title & Subtitle
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 26px system-ui, -apple-system, sans-serif';
-  ctx.fillText('GUNDANNA BAKERY', 36, 54);
+  ctx.font = 'bold 25px system-ui, -apple-system, sans-serif';
+  ctx.fillText('GUNDANNA BAKERY', 36, 52);
 
   ctx.fillStyle = '#FDE047';
-  ctx.font = '600 13px system-ui, -apple-system, sans-serif';
-  ctx.fillText('OFFICIAL DIGITAL ORDER SLIP • COUNTER SUMMARY', 36, 78);
+  ctx.font = '700 13px system-ui, -apple-system, sans-serif';
+  ctx.fillText('OFFICIAL UNEDITABLE ORDER SUMMARY SLIP', 36, 76);
 
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 13px monospace';
-  ctx.fillText(`SECURITY CODE: ${checksum}`, 36, 102);
+  ctx.font = 'bold 12px monospace';
+  ctx.fillText(`SECURITY VERIFICATION CODE: ${checksum}`, 36, 100);
 
   // Right Header Details
   ctx.fillStyle = '#FEF08A';
   ctx.font = '500 12px system-ui, -apple-system, sans-serif';
   ctx.textAlign = 'right';
-  ctx.fillText(dateStr, logicalWidth - 36, 52);
-  ctx.fillText(`Phone: ${bakeryInfo.phone}`, logicalWidth - 36, 74);
-  ctx.fillText(`Hassan, Karnataka`, logicalWidth - 36, 96);
+  ctx.fillText(dateStr, logicalWidth - 36, 50);
+  ctx.fillText(`Phone: 094836 22026`, logicalWidth - 36, 72);
+  ctx.fillText(`Hassan, Karnataka`, logicalWidth - 36, 94);
   ctx.textAlign = 'left';
 
   // Table Header Bar
@@ -98,7 +99,7 @@ export function generateReceiptImage(myList) {
 
   y += 46;
 
-  // Table Items
+  // Table Items Rows
   myList.forEach((entry, idx) => {
     // Row background striping
     if (idx % 2 === 0) {
@@ -128,7 +129,7 @@ export function generateReceiptImage(myList) {
 
     y += 24;
 
-    // Customization details
+    // Customization details if present
     if (entry.customization) {
       const { nameOnCake, occasion, eventDate, notes } = entry.customization;
       if (nameOnCake || occasion || eventDate || notes) {
@@ -146,7 +147,7 @@ export function generateReceiptImage(myList) {
       }
     }
 
-    // Divider
+    // Divider line
     ctx.strokeStyle = '#FED7AA';
     ctx.lineWidth = 1;
     ctx.beginPath();
@@ -157,9 +158,9 @@ export function generateReceiptImage(myList) {
     y += 18;
   });
 
-  y += 12;
+  y += 10;
 
-  // Total Box Banner
+  // Grand Total Summary Box
   ctx.fillStyle = '#FEF3C7';
   ctx.strokeStyle = '#F59E0B';
   ctx.lineWidth = 2;
@@ -176,16 +177,29 @@ export function generateReceiptImage(myList) {
   ctx.fillText(`GRAND TOTAL: ₹${totalPrice}`, logicalWidth - 56, y + 35);
   ctx.textAlign = 'left';
 
-  y += 82;
+  y += 74;
 
-  // Security Stamp & Notice Footer
+  // COMPULSORY NOTICE BOX
+  ctx.fillStyle = '#FEF2F2';
+  ctx.strokeStyle = '#EF4444';
+  ctx.lineWidth = 1.5;
+  ctx.fillRect(36, y, logicalWidth - 72, 60);
+  ctx.strokeRect(36, y, logicalWidth - 72, 60);
+
   ctx.fillStyle = '#DC2626';
   ctx.font = 'bold 12px system-ui, -apple-system, sans-serif';
-  ctx.fillText('🔒 OFFICIAL UNEDITABLE DIGITAL SLIP — Cross-checked at Bakery Counter', 36, y);
+  ctx.fillText('⚠️ COMPULSORY NOTE FOR ORDER ACCEPTANCE:', 48, y + 22);
 
+  ctx.fillStyle = '#991B1B';
+  ctx.font = '600 11px system-ui, -apple-system, sans-serif';
+  ctx.fillText('Sharing this Digital Order Slip on WhatsApp (94836 22026) is compulsory for order confirmation!', 48, y + 42);
+
+  y += 75;
+
+  // Security Stamp Footer
   ctx.fillStyle = '#64748B';
   ctx.font = '500 11px system-ui, -apple-system, sans-serif';
-  ctx.fillText(`Security Verification Code: ${checksum} • ${bakeryInfo.name}, Hassan`, 36, y + 20);
+  ctx.fillText(`Security Verification Code: ${checksum} • ${bakeryInfo.name}, Hassan`, 36, y);
 
   return canvas.toDataURL('image/png', 1.0);
 }

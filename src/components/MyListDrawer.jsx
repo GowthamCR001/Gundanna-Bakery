@@ -537,64 +537,88 @@ export default function MyListDrawer({ isOpen, onClose, myList, updateQuantity, 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
+              className="fixed inset-0 z-[60] bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto"
               onClick={() => setShowSlipModal(false)}
             >
               <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
+                initial={{ scale: 0.92, opacity: 0, y: 10 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.92, opacity: 0, y: 10 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white rounded-2xl p-4 max-w-lg w-full space-y-3 shadow-2xl overflow-hidden flex flex-col items-center"
+                className="bg-white rounded-3xl p-3.5 sm:p-5 max-w-lg w-full space-y-3.5 shadow-2xl overflow-hidden flex flex-col items-center my-auto border border-amber-200"
               >
-                <div className="w-full flex items-center justify-between border-b pb-2">
+                {/* Modal Title Header */}
+                <div className="w-full flex items-center justify-between border-b border-slate-100 pb-3">
                   <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-5 h-5 text-emerald-600" />
-                    <h3 className="font-bold text-sm text-slate-900">
-                      Official Uneditable Order Slip
-                    </h3>
+                    <div className="p-1.5 rounded-lg bg-emerald-100 text-emerald-700">
+                      <ShieldCheck className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-heading font-extrabold text-base sm:text-lg text-slate-900 leading-tight">
+                        Official Order Summary Slip
+                      </h3>
+                      <p className="text-[11px] text-slate-500 font-medium">
+                        ಆಫಿಷಿಯಲ್ ಆರ್ಡರ್ ಸಮ್ಮರಿ ಸ್ಲಿಪ್ • Gundanna Bakery
+                      </p>
+                    </div>
                   </div>
                   <button
                     onClick={() => setShowSlipModal(false)}
-                    className="p-1 rounded-full text-slate-400 hover:text-slate-600"
+                    className="p-2 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>
                 </div>
 
-                {/* Generated PNG Image */}
-                <div className="w-full overflow-y-auto max-h-[60vh] border rounded-xl bg-slate-50 p-2 flex justify-center">
+                {/* Compulsory WhatsApp Order Confirmation Notice Box */}
+                <div className="w-full p-2.5 bg-red-50 rounded-xl border border-red-200 text-red-950 text-xs space-y-1">
+                  <div className="font-extrabold flex items-center gap-1.5 text-red-700">
+                    <span className="text-sm">⚠️</span>
+                    <span>COMPULSORY NOTE FOR ORDER ACCEPTANCE:</span>
+                  </div>
+                  <p className="text-[11px] font-semibold text-red-900 leading-normal">
+                    Sharing this Digital Order Slip on WhatsApp (<strong>94836 22026</strong>) is <strong>compulsory</strong> for order confirmation and cash counter acceptance!
+                  </p>
+                  <p className="text-[10px] font-bold text-red-800 pt-0.5">
+                    (ಸೂಚನೆ: ನಿಮ್ಮ ಆರ್ಡರ್ ಖಚಿತಪಡಿಸಲು ಈ ಡಿಜಿಟಲ್ ಸ್ಲಿಪ್ ಅನ್ನು ವಾಟ್ಸಾಪ್ (94836 22026) ಮೂಲಕ ಕಳುಹಿಸುವುದು ಕಡ್ಡಾಯವಾಗಿದೆ.)
+                  </p>
+                </div>
+
+                {/* Generated HD PNG Image Preview */}
+                <div className="w-full overflow-y-auto max-h-[52vh] border rounded-2xl bg-amber-50/40 p-2 flex justify-center shadow-inner">
                   <img
                     src={receiptDataUrl}
-                    alt="Official Gundanna Bakery Order Receipt"
-                    className="max-w-full h-auto rounded shadow"
+                    alt="Official Gundanna Bakery Order Summary Slip"
+                    className="max-w-full h-auto rounded-xl shadow-md border border-amber-200/60"
                   />
                 </div>
 
-                <div className="w-full flex items-center justify-between gap-2 pt-2">
-                  <p className="text-[11px] text-slate-500 max-w-xs">
-                    🔒 Official Stamped Slip with Verification Code. Uneditable image prevents price tampering.
-                  </p>
-                  
-                  <div className="flex items-center gap-2 shrink-0">
-                    <button
-                      onClick={handleDownloadReceipt}
-                      className="px-3.5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm active:scale-95 transition-all"
-                    >
-                      <Download className="w-4 h-4" />
-                      Save Image
-                    </button>
+                {/* Footer Action Buttons for Mobile & Desktop */}
+                <div className="w-full space-y-2 pt-1">
+                  <div className="flex flex-col sm:flex-row items-center gap-2">
                     <button
                       onClick={() => {
                         setShowSlipModal(false);
                         handleWhatsAppShare();
                       }}
-                      className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm active:scale-95 transition-all"
+                      className="w-full flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
                     >
                       <Send className="w-4 h-4" />
-                      WhatsApp
+                      <span>Send Order on WhatsApp (9483622026)</span>
+                    </button>
+
+                    <button
+                      onClick={handleDownloadReceipt}
+                      className="w-full sm:w-auto py-3 px-4 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-all"
+                    >
+                      <Download className="w-4 h-4" />
+                      <span>Save Slip Image</span>
                     </button>
                   </div>
+
+                  <p className="text-[10px] text-center text-slate-400 font-medium">
+                    🔒 Official Uneditable Order Slip • Security Verification Hash: <span className="font-mono font-bold text-slate-600">{orderChecksum}</span>
+                  </p>
                 </div>
               </motion.div>
             </motion.div>
