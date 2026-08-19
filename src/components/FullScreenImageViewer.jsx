@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, Maximize2 } from 'lucide-react';
+import { X, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function FullScreenImageViewer({ src, alt, onClose }) {
@@ -11,10 +11,41 @@ export default function FullScreenImageViewer({ src, alt, onClose }) {
   const touchDistRef = useRef(null);
   const containerRef = useRef(null);
 
+  // Clamp panning position so image stays within container bounds
+  const clampPosition = (x, y, currentScale) => {
+    if (currentScale <= 1) return { x: 0, y: 0 };
+    if (!containerRef.current) return { x, y };
+
+    const rect = containerRef.current.getBoundingClientRect();
+    // Maximum panning offsets allowed based on scale factor
+    const maxX = (rect.width * (currentScale - 1)) / 2;
+    const maxY = (rect.height * (currentScale - 1)) / 2;
+
+    return {
+      x: Math.min(Math.max(x, -maxX), maxX),
+      y: Math.min(Math.max(y, -maxY), maxY),
+    };
+  };
+
   // Reset scale and position
   const resetZoom = () => {
     setScale(1);
     setPosition({ x: 0, y: 0 });
+  };
+
+  const handleZoomIn = () => {
+    setScale((prev) => {
+      const next = Math.min(prev + 0.75, 4);
+      return next;
+    });
+  };
+
+  const handleZoomOut = () => {
+    setScale((prev) => {
+      const next = Math.max(prev - 0.75, 1);
+      if (next === 1) setPosition({ x: 0, y: 0 });
+      return next;
+    });
   };
 
   // Close on Escape key
@@ -35,9 +66,11 @@ export default function FullScreenImageViewer({ src, alt, onClose }) {
 
     const zoomFactor = e.deltaY < 0 ? 1.25 : 0.8;
     setScale((prevScale) => {
-      const nextScale = Math.min(Math.max(1, prevScale * zoomFactor), 5);
+      const nextScale = Math.min(Math.max(1, prevScale * zoomFactor), 4);
       if (nextScale === 1) {
         setPosition({ x: 0, y: 0 });
+      } else {
+        setPosition((pos) => clampPosition(pos.x, pos.y, nextScale));
       }
       return nextScale;
     });
@@ -49,7 +82,7 @@ export default function FullScreenImageViewer({ src, alt, onClose }) {
     if (scale > 1) {
       resetZoom();
     } else {
-      setScale(2.5);
+      setScale(2.2);
     }
   };
 
@@ -67,10 +100,9 @@ export default function FullScreenImageViewer({ src, alt, onClose }) {
   const handleMouseMove = (e) => {
     if (!isDragging || scale <= 1) return;
     e.preventDefault();
-    setPosition({
-      x: e.clientX - dragStart.x,
-      y: e.clientY - dragStart.y,
-    });
+    const rawX = e.clientX - dragStart.x;
+    const rawY = e.clientY - dragStart.y;
+    setPosition(clampPosition(rawX, rawY, scale));
   };
 
   const handleMouseUp = () => {
@@ -103,17 +135,18 @@ export default function FullScreenImageViewer({ src, alt, onClose }) {
       touchDistRef.current = newDist;
 
       setScale((prevScale) => {
-        const nextScale = Math.min(Math.max(1, prevScale * factor), 5);
+        const nextScale = Math.min(Math.max(1, prevScale * factor), 4);
         if (nextScale === 1) {
           setPosition({ x: 0, y: 0 });
+        } else {
+          setPosition((pos) => clampPosition(pos.x, pos.y, nextScale));
         }
         return nextScale;
       });
     } else if (e.touches.length === 1 && isDragging && scale > 1) {
-      setPosition({
-        x: e.touches[0].clientX - dragStart.x,
-        y: e.touches[0].clientY - dragStart.y,
-      });
+      const rawX = e.touches[0].clientX - dragStart.x;
+      const rawY = e.touches[0].clientY - dragStart.y;
+      setPosition(clampPosition(rawX, rawY, scale));
     }
   };
 
@@ -135,28 +168,66 @@ export default function FullScreenImageViewer({ src, alt, onClose }) {
           }
         }}
       >
-        {/* Top Header */}
-        <div className="w-full flex items-center justify-between p-4 bg-gradient-to-b from-black/80 to-transparent z-10 text-white pointer-events-auto">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-amber-400 bg-amber-950/60 border border-amber-500/30 px-2.5 py-1 rounded-full">
-              Full Screen Image
-            </span>
-            {alt && <span className="text-sm font-medium text-slate-300 truncate max-w-xs">{alt}</span>}
+        {/* Top Header Navigation & Controls */}
+        <div className="w-full flex items-center justify-between p-3.5 sm:p-4 bg-gradient-to-b from-black/90 via-black/60 to-transparent z-20 text-white pointer-events-auto gap-3">
+          {/* Title on Left (No Full Screen Image button) */}
+          <div className="flex-1 min-w-0">
+            {alt ? (
+              <h3 className="text-xs sm:text-base font-bold text-slate-100 truncate leading-snug">
+                {alt}
+              </h3>
+            ) : (
+              <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider">
+                Image View
+              </span>
+            )}
           </div>
 
-          <button
-            onClick={onClose}
-            className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/20 backdrop-blur-sm active:scale-95"
-            title="Close Full Screen"
-          >
-            <X className="w-6 h-6" />
-          </button>
+          {/* Action Controls: Zoom Out, Zoom In, Reset, Close */}
+          <div className="flex items-center gap-2 shrink-0">
+            {scale > 1 && (
+              <button
+                onClick={resetZoom}
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-semibold transition-all active:scale-95"
+                title="Reset Zoom"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Reset</span>
+              </button>
+            )}
+
+            <button
+              onClick={handleZoomOut}
+              disabled={scale <= 1}
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:pointer-events-none text-white border border-white/20 transition-all active:scale-95"
+              title="Zoom Out"
+            >
+              <ZoomOut className="w-4 h-4" />
+            </button>
+
+            <button
+              onClick={handleZoomIn}
+              disabled={scale >= 4}
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:pointer-events-none text-white border border-white/20 transition-all active:scale-95"
+              title="Zoom In"
+            >
+              <ZoomIn className="w-4 h-4" />
+            </button>
+
+            <button
+              onClick={onClose}
+              className="p-2 rounded-full bg-red-600/80 hover:bg-red-600 text-white border border-white/20 transition-colors active:scale-95 ml-1 shadow-md"
+              title="Close Full Screen"
+            >
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
+          </div>
         </div>
 
-        {/* Main Image Container */}
+        {/* Main Image View Container */}
         <div
           ref={containerRef}
-          className="relative flex-1 w-full flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing"
+          className="relative flex-1 w-full flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing p-2"
           onWheel={handleWheel}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
@@ -170,7 +241,7 @@ export default function FullScreenImageViewer({ src, alt, onClose }) {
           <motion.img
             src={src}
             alt={alt || 'Full screen preview'}
-            className="max-w-full max-h-full object-contain pointer-events-none select-none transition-transform duration-75 ease-out"
+            className="max-w-full max-h-full object-contain pointer-events-none select-none transition-transform duration-75 ease-out rounded-lg shadow-2xl"
             style={{
               transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
               cursor: scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in',
@@ -178,12 +249,12 @@ export default function FullScreenImageViewer({ src, alt, onClose }) {
           />
         </div>
 
-        {/* Bottom Helper Bar (Text only, NO zoom in / zoom out icons) */}
-        <div className="w-full py-3 px-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 text-center text-xs text-slate-300 pointer-events-none">
+        {/* Bottom Helper Footer */}
+        <div className="w-full py-2.5 px-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-20 text-center text-[11px] sm:text-xs text-slate-300 pointer-events-none">
           <p className="font-medium tracking-wide">
             {scale > 1
-              ? 'Drag to pan • Double-click or scroll/pinch to reset zoom'
-              : 'Scroll wheel or pinch to zoom • Double-click to zoom in'}
+              ? 'Drag to pan around image • Pinch or tap Reset to zoom out'
+              : 'Pinch or double-tap to zoom • Tap + / - to adjust'}
           </p>
         </div>
       </motion.div>
