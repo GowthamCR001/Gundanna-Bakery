@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { X, ShoppingBag, Plus, Minus, Trash2, Send, Sparkles, Cake, Calendar, Edit3, Check, ChevronDown, ChevronUp } from 'lucide-react';
+import { X, ShoppingBag, Plus, Minus, Trash2, Send, Sparkles, Cake, Calendar, Edit3, Check, ChevronDown, ChevronUp, ShieldCheck, FileText, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import bakeryInfo from '../data/bakeryInfo.json';
+import { generateOrderChecksum } from '../utils/orderHash';
+import { generateReceiptImage } from '../utils/receiptGenerator';
 
 const OCCASION_OPTIONS = [
   { id: 'Birthday', label: 'Birthday 🎂' },
@@ -15,11 +17,14 @@ const OCCASION_OPTIONS = [
 export default function MyListDrawer({ isOpen, onClose, myList, updateQuantity, updateCustomization, clearList }) {
   const [isCounterMode, setIsCounterMode] = useState(false);
   const [editingItemId, setEditingItemId] = useState(null);
+  const [showSlipModal, setShowSlipModal] = useState(false);
+  const [receiptDataUrl, setReceiptDataUrl] = useState(null);
 
   if (!isOpen) return null;
 
   const totalItemsCount = myList.reduce((sum, entry) => sum + entry.quantity, 0);
   const totalPrice = myList.reduce((sum, entry) => sum + (entry.item.price * entry.quantity), 0);
+  const orderChecksum = generateOrderChecksum(myList);
 
   const isCakeItem = (item) => {
     if (!item) return false;
@@ -29,7 +34,9 @@ export default function MyListDrawer({ isOpen, onClose, myList, updateQuantity, 
   const handleWhatsAppShare = () => {
     if (myList.length === 0) return;
     
-    let text = `👋 *${bakeryInfo.name} — Order & Cake Customization List*\n`;
+    let text = `👋 *${bakeryInfo.name} — OFFICIAL SELECTION LIST*\n`;
+    text += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+    text += `🔒 *SECURITY VERIFICATION CODE:* \`${orderChecksum}\`\n`;
     text += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
 
     myList.forEach((entry, idx) => {
@@ -59,13 +66,29 @@ export default function MyListDrawer({ isOpen, onClose, myList, updateQuantity, 
     });
 
     text += `━━━━━━━━━━━━━━━━━━━━━━\n`;
-    text += `💰 *Total Estimated Amount: ₹${totalPrice}*\n`;
+    text += `💰 *TOTAL ESTIMATED AMOUNT: ₹${totalPrice}*\n`;
+    text += `🔒 *VERIFICATION CODE:* \`${orderChecksum}\`\n`;
+    text += `⚠️ *SECURITY NOTICE:* Official price breakdown is cross-checked at Bakery Cash Counter against Security Code \`${orderChecksum}\`.\n\n`;
     text += `📍 *Pickup Location:* ${bakeryInfo.shortName}, Hassan\n`;
     text += `📞 *Phone:* ${bakeryInfo.phone}`;
 
     const encodedText = encodeURIComponent(text);
     const whatsappUrl = `https://wa.me/${bakeryInfo.whatsapp}?text=${encodedText}`;
     window.open(whatsappUrl, '_blank');
+  };
+
+  const handleOpenReceiptSlip = () => {
+    const dataUrl = generateReceiptImage(myList);
+    setReceiptDataUrl(dataUrl);
+    setShowSlipModal(true);
+  };
+
+  const handleDownloadReceipt = () => {
+    if (!receiptDataUrl) return;
+    const a = document.createElement('a');
+    a.href = receiptDataUrl;
+    a.download = `Gundanna_Bakery_Order_${orderChecksum.replace(/[^a-zA-Z0-9]/g, '')}.png`;
+    a.click();
   };
 
   return (
@@ -451,6 +474,17 @@ export default function MyListDrawer({ isOpen, onClose, myList, updateQuantity, 
           {/* Footer Total & Actions */}
           {myList.length > 0 && (
             <div className="p-4 bg-white border-t border-slate-100 space-y-3">
+              {/* Security Verification Code Banner */}
+              <div className="p-2 bg-amber-50 rounded-xl border border-amber-200/80 flex items-center justify-between text-xs text-amber-950 font-bold">
+                <div className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Tamper-Proof Code:</span>
+                </div>
+                <span className="font-mono bg-white px-2 py-0.5 rounded border border-amber-300 text-amber-900 text-[11px]">
+                  {orderChecksum}
+                </span>
+              </div>
+
               <div className="flex items-center justify-between px-1">
                 <div>
                   <span className="text-xs text-bakery-muted block">Estimated Total</span>
@@ -464,10 +498,21 @@ export default function MyListDrawer({ isOpen, onClose, myList, updateQuantity, 
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-center gap-2">
+                {/* Official Uneditable Digital Receipt Slip Image Button */}
+                <button
+                  onClick={handleOpenReceiptSlip}
+                  className="w-full sm:w-auto py-2.5 px-3.5 rounded-xl bg-amber-100/90 hover:bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center gap-1.5 border border-amber-300 transition-all active:scale-95 shadow-xs"
+                  title="View / Download Official Uneditable Digital Receipt Slip"
+                >
+                  <FileText className="w-4 h-4 text-amber-800" />
+                  <span>Digital Slip Image 🖼️</span>
+                </button>
+
                 <button
                   onClick={handleWhatsAppShare}
-                  className="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
+                  className="w-full flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
                 >
                   <Send className="w-4 h-4" />
                   Send List on WhatsApp
@@ -475,7 +520,7 @@ export default function MyListDrawer({ isOpen, onClose, myList, updateQuantity, 
 
                 <button
                   onClick={onClose}
-                  className="py-3 px-4 rounded-xl bg-bakery-primary hover:bg-bakery-primary/90 text-white font-bold text-xs shadow-md active:scale-95 transition-all"
+                  className="w-full sm:w-auto py-3 px-4 rounded-xl bg-bakery-primary hover:bg-bakery-primary/90 text-white font-bold text-xs shadow-md active:scale-95 transition-all"
                 >
                   Done
                 </button>
@@ -483,6 +528,77 @@ export default function MyListDrawer({ isOpen, onClose, myList, updateQuantity, 
             </div>
           )}
         </motion.div>
+
+        {/* Official Uneditable Digital Order Slip Modal Overlay */}
+        <AnimatePresence>
+          {showSlipModal && receiptDataUrl && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
+              onClick={() => setShowSlipModal(false)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+                className="bg-white rounded-2xl p-4 max-w-lg w-full space-y-3 shadow-2xl overflow-hidden flex flex-col items-center"
+              >
+                <div className="w-full flex items-center justify-between border-b pb-2">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="w-5 h-5 text-emerald-600" />
+                    <h3 className="font-bold text-sm text-slate-900">
+                      Official Uneditable Order Slip
+                    </h3>
+                  </div>
+                  <button
+                    onClick={() => setShowSlipModal(false)}
+                    className="p-1 rounded-full text-slate-400 hover:text-slate-600"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Generated PNG Image */}
+                <div className="w-full overflow-y-auto max-h-[60vh] border rounded-xl bg-slate-50 p-2 flex justify-center">
+                  <img
+                    src={receiptDataUrl}
+                    alt="Official Gundanna Bakery Order Receipt"
+                    className="max-w-full h-auto rounded shadow"
+                  />
+                </div>
+
+                <div className="w-full flex items-center justify-between gap-2 pt-2">
+                  <p className="text-[11px] text-slate-500 max-w-xs">
+                    🔒 Official Stamped Slip with Verification Code. Uneditable image prevents price tampering.
+                  </p>
+                  
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      onClick={handleDownloadReceipt}
+                      className="px-3.5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm active:scale-95 transition-all"
+                    >
+                      <Download className="w-4 h-4" />
+                      Save Image
+                    </button>
+                    <button
+                      onClick={() => {
+                        setShowSlipModal(false);
+                        handleWhatsAppShare();
+                      }}
+                      className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm active:scale-95 transition-all"
+                    >
+                      <Send className="w-4 h-4" />
+                      WhatsApp
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </AnimatePresence>
   );
