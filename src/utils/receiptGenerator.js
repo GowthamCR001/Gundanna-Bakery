@@ -2,8 +2,8 @@ import bakeryInfo from '../data/bakeryInfo.json';
 import { generateOrderChecksum } from './orderHash';
 
 /**
- * Generates an official, uneditable PNG receipt image using HTML5 Canvas.
- * Prevents price tampering by rendering an official stamped bill image that can be shared to WhatsApp.
+ * Generates an ultra-high-resolution (3x Retina HD) uneditable PNG receipt image using HTML5 Canvas.
+ * Rendered at 1920px width for crystal clear text readability on all mobile & desktop screens.
  */
 export function generateReceiptImage(myList) {
   if (!Array.isArray(myList) || myList.length === 0) return null;
@@ -16,146 +16,176 @@ export function generateReceiptImage(myList) {
     timeStyle: 'short'
   });
 
-  // Calculate dynamic canvas height based on items and customization notes
-  let extraHeight = 0;
+  // Calculate dynamic line count
+  let extraLines = 0;
   myList.forEach((entry) => {
     if (entry.customization) {
       const { nameOnCake, occasion, eventDate, notes } = entry.customization;
-      if (nameOnCake || occasion || eventDate || notes) extraHeight += 50;
+      if (nameOnCake || occasion || eventDate || notes) extraLines += 2;
     }
   });
 
-  const width = 640;
-  const itemLineHeight = 36;
-  const height = Math.max(520, 360 + myList.length * itemLineHeight + extraHeight);
+  // Base Logical dimensions
+  const logicalWidth = 640;
+  const itemHeight = 44;
+  const logicalHeight = Math.max(540, 360 + myList.length * itemHeight + extraLines * 24);
+
+  // High Resolution Scale Factor (3x Retina)
+  const scale = 3;
 
   const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext('2d');
+  canvas.width = logicalWidth * scale;
+  canvas.height = logicalHeight * scale;
 
-  // Background
-  ctx.fillStyle = '#FFFDF9';
-  ctx.fillRect(0, 0, width, height);
+  const ctx = canvas.getContext('2d');
+  ctx.scale(scale, scale);
+
+  // Background - Clean Cream / White
+  ctx.fillStyle = '#FAF9F6';
+  ctx.fillRect(0, 0, logicalWidth, logicalHeight);
 
   // Outer Border
-  ctx.strokeStyle = '#E2D1C3';
-  ctx.lineWidth = 4;
-  ctx.strokeRect(10, 10, width - 20, height - 20);
+  ctx.strokeStyle = '#D97706';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(12, 12, logicalWidth - 24, logicalHeight - 24);
 
-  // Top Header Banner
-  const gradient = ctx.createLinearGradient(0, 0, width, 0);
-  gradient.addColorStop(0, '#5C2D12');
-  gradient.addColorStop(1, '#854D0E');
+  ctx.strokeStyle = '#FDE68A';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(16, 16, logicalWidth - 32, logicalHeight - 32);
+
+  // Top Header Banner Gradient
+  const gradient = ctx.createLinearGradient(0, 0, logicalWidth, 0);
+  gradient.addColorStop(0, '#451A03');
+  gradient.addColorStop(0.5, '#78350F');
+  gradient.addColorStop(1, '#92400E');
   ctx.fillStyle = gradient;
-  ctx.fillRect(12, 12, width - 24, 110);
+  ctx.fillRect(18, 18, logicalWidth - 36, 115);
 
-  // Header Title
+  // Header Title & Logo Text
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 24px sans-serif';
-  ctx.fillText('GUNDANNA BAKERY', 30, 48);
-
-  ctx.fillStyle = '#FEF08A';
-  ctx.font = '13px sans-serif';
-  ctx.fillText('Official Digital Order Summary & Counter Slip', 30, 70);
+  ctx.font = 'bold 26px system-ui, -apple-system, sans-serif';
+  ctx.fillText('GUNDANNA BAKERY', 36, 54);
 
   ctx.fillStyle = '#FDE047';
-  ctx.font = 'bold 12px monospace';
-  ctx.fillText(`VERIFICATION CODE: ${checksum}`, 30, 94);
+  ctx.font = '600 13px system-ui, -apple-system, sans-serif';
+  ctx.fillText('OFFICIAL DIGITAL ORDER SLIP • COUNTER SUMMARY', 36, 78);
 
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = '11px sans-serif';
+  ctx.font = 'bold 13px monospace';
+  ctx.fillText(`SECURITY CODE: ${checksum}`, 36, 102);
+
+  // Right Header Details
+  ctx.fillStyle = '#FEF08A';
+  ctx.font = '500 12px system-ui, -apple-system, sans-serif';
   ctx.textAlign = 'right';
-  ctx.fillText(dateStr, width - 30, 48);
-  ctx.fillText(`Phone: ${bakeryInfo.phone}`, width - 30, 70);
+  ctx.fillText(dateStr, logicalWidth - 36, 52);
+  ctx.fillText(`Phone: ${bakeryInfo.phone}`, logicalWidth - 36, 74);
+  ctx.fillText(`Hassan, Karnataka`, logicalWidth - 36, 96);
   ctx.textAlign = 'left';
 
-  // Table Header
-  let y = 145;
+  // Table Header Bar
+  let y = 152;
   ctx.fillStyle = '#F59E0B';
-  ctx.fillRect(30, y, width - 60, 30);
+  ctx.fillRect(36, y, logicalWidth - 72, 34);
 
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 12px sans-serif';
-  ctx.fillText('Item Description', 40, y + 20);
-  ctx.fillText('Qty', 380, y + 20);
-  ctx.fillText('Price', 450, y + 20);
-  ctx.fillText('Total', 540, y + 20);
+  ctx.fillStyle = '#78350F';
+  ctx.font = 'bold 13px system-ui, -apple-system, sans-serif';
+  ctx.fillText('#', 48, y + 22);
+  ctx.fillText('Item Description', 76, y + 22);
+  ctx.fillText('Qty', 400, y + 22);
+  ctx.fillText('Price', 470, y + 22);
+  ctx.fillText('Total', 545, y + 22);
 
-  y += 40;
-  ctx.fillStyle = '#1E293B';
+  y += 46;
 
-  // Table Rows
+  // Table Items
   myList.forEach((entry, idx) => {
-    ctx.font = 'bold 13px sans-serif';
-    // Truncate long item names if needed
-    const itemName = entry.item.name.length > 38 ? entry.item.name.substring(0, 35) + '...' : entry.item.name;
-    ctx.fillText(`${idx + 1}. ${itemName}`, 40, y);
+    // Row background striping
+    if (idx % 2 === 0) {
+      ctx.fillStyle = '#FFF7ED';
+      ctx.fillRect(36, y - 18, logicalWidth - 72, 36);
+    }
 
-    ctx.font = '13px sans-serif';
-    ctx.fillText(`${entry.quantity}`, 385, y);
-    ctx.fillText(`₹${entry.item.price}`, 450, y);
-    ctx.fillText(`₹${entry.item.price * entry.quantity}`, 540, y);
+    // Number & Name
+    ctx.fillStyle = '#1E293B';
+    ctx.font = 'bold 14px system-ui, -apple-system, sans-serif';
+    ctx.fillText(`${idx + 1}.`, 48, y);
+
+    const displayName = entry.item.name.length > 36 ? entry.item.name.substring(0, 33) + '...' : entry.item.name;
+    ctx.fillText(displayName, 76, y);
+
+    // Qty, Price, Total
+    ctx.font = '600 14px system-ui, -apple-system, sans-serif';
+    ctx.fillStyle = '#0F172A';
+    ctx.fillText(`${entry.quantity}x`, 400, y);
+
+    ctx.fillStyle = '#475569';
+    ctx.fillText(`₹${entry.item.price}`, 470, y);
+
+    ctx.fillStyle = '#B45309';
+    ctx.font = 'bold 14px system-ui, -apple-system, sans-serif';
+    ctx.fillText(`₹${entry.item.price * entry.quantity}`, 545, y);
 
     y += 24;
 
-    // Render Customization if present
+    // Customization details
     if (entry.customization) {
       const { nameOnCake, occasion, eventDate, notes } = entry.customization;
       if (nameOnCake || occasion || eventDate || notes) {
-        ctx.fillStyle = '#78350F';
-        ctx.font = '11px sans-serif';
-        let custStr = '   🎂 Details: ';
-        if (occasion) custStr += `[Occasion: ${occasion}] `;
-        if (nameOnCake) custStr += `[Name on Cake: "${nameOnCake}"] `;
-        if (eventDate) custStr += `[Date: ${eventDate}] `;
-        if (notes) custStr += `[Note: ${notes}]`;
-        ctx.fillText(custStr.substring(0, 85), 40, y);
-        ctx.fillStyle = '#1E293B';
-        y += 20;
+        ctx.fillStyle = '#991B1B';
+        ctx.font = 'bold 12px system-ui, -apple-system, sans-serif';
+
+        let custText = '    🎂 Details: ';
+        if (occasion) custText += `[${occasion}] `;
+        if (nameOnCake) custText += `[Name on Cake: "${nameOnCake}"] `;
+        if (eventDate) custText += `[Date: ${eventDate}] `;
+        if (notes) custText += `[Note: ${notes}]`;
+
+        ctx.fillText(custText.substring(0, 80), 76, y);
+        y += 22;
       }
     }
 
-    // Separator line
-    ctx.strokeStyle = '#F1F5F9';
+    // Divider
+    ctx.strokeStyle = '#FED7AA';
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(30, y);
-    ctx.lineTo(width - 30, y);
+    ctx.moveTo(36, y + 6);
+    ctx.lineTo(logicalWidth - 36, y + 6);
     ctx.stroke();
 
-    y += 14;
+    y += 18;
   });
 
-  y += 10;
+  y += 12;
 
-  // Total Summary Box
+  // Total Box Banner
   ctx.fillStyle = '#FEF3C7';
   ctx.strokeStyle = '#F59E0B';
-  ctx.lineWidth = 1.5;
-  ctx.fillRect(30, y, width - 60, 50);
-  ctx.strokeRect(30, y, width - 60, 50);
+  ctx.lineWidth = 2;
+  ctx.fillRect(36, y, logicalWidth - 72, 54);
+  ctx.strokeRect(36, y, logicalWidth - 72, 54);
 
-  ctx.fillStyle = '#92400E';
-  ctx.font = 'bold 14px sans-serif';
-  ctx.fillText(`TOTAL ITEMS: ${totalItems}`, 50, y + 30);
+  ctx.fillStyle = '#78350F';
+  ctx.font = 'bold 14px system-ui, -apple-system, sans-serif';
+  ctx.fillText(`TOTAL ITEMS: ${totalItems} Pcs`, 56, y + 33);
 
   ctx.fillStyle = '#B45309';
-  ctx.font = 'bold 18px sans-serif';
+  ctx.font = 'bold 22px system-ui, -apple-system, sans-serif';
   ctx.textAlign = 'right';
-  ctx.fillText(`FINAL TOTAL: ₹${totalPrice}`, width - 50, y + 32);
+  ctx.fillText(`GRAND TOTAL: ₹${totalPrice}`, logicalWidth - 56, y + 35);
   ctx.textAlign = 'left';
 
-  y += 75;
+  y += 82;
 
-  // Security Stamp & Notice
+  // Security Stamp & Notice Footer
   ctx.fillStyle = '#DC2626';
-  ctx.font = 'bold 11px sans-serif';
-  ctx.fillText('🔒 OFFICIAL UNEDITABLE ORDER SLIP — Cross-checked at Bakery Counter', 30, y);
+  ctx.font = 'bold 12px system-ui, -apple-system, sans-serif';
+  ctx.fillText('🔒 OFFICIAL UNEDITABLE DIGITAL SLIP — Cross-checked at Bakery Counter', 36, y);
 
   ctx.fillStyle = '#64748B';
-  ctx.font = '10px sans-serif';
-  ctx.fillText(`Security Hash: ${checksum} • Bakery Location: ${bakeryInfo.address}`, 30, y + 16);
+  ctx.font = '500 11px system-ui, -apple-system, sans-serif';
+  ctx.fillText(`Security Verification Code: ${checksum} • ${bakeryInfo.name}, Hassan`, 36, y + 20);
 
-  return canvas.toDataURL('image/png');
+  return canvas.toDataURL('image/png', 1.0);
 }
