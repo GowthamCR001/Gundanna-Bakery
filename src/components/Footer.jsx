@@ -4,7 +4,7 @@ import bakeryInfo from '../data/bakeryInfo.json';
 
 export default function Footer({ onOpenQr }) {
   return (
-    <footer className="bg-gradient-to-b from-bakery-primary/95 to-amber-950 text-amber-50 pt-10 pb-16 px-4 border-t-4 border-bakery-secondary">
+    <footer className="bg-gradient-to-b from-bakery-primary/95 to-amber-950 text-amber-50 pt-10 pb-36 sm:pb-20 px-4 border-t-4 border-bakery-secondary">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Top Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pb-8 border-b border-amber-800/60">
@@ -87,12 +87,12 @@ export default function Footer({ onOpenQr }) {
         </div>
 
         {/* Footer Bottom bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-amber-300/80 pt-4 border-t border-amber-800/60">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-amber-300/80 pt-4 border-t border-amber-800/60">
           <p>© {new Date().getFullYear()} {bakeryInfo.name}. All Rights Reserved.</p>
           
-          <div className="flex items-center gap-1.5 bg-amber-900/90 px-3.5 py-1.5 rounded-full border border-amber-700/60 shadow-xs">
-            <span className="text-amber-200/90 text-xs font-medium">Developed by</span>
-            <span className="font-extrabold text-amber-300 text-xs tracking-wider">
+          <div className="flex items-center gap-2 bg-gradient-to-r from-amber-900 via-amber-800 to-amber-900 px-4 py-2 rounded-full border border-amber-500/50 shadow-md">
+            <span className="text-amber-200 text-xs font-medium">Developed by</span>
+            <span className="font-extrabold text-amber-300 text-xs tracking-wider uppercase font-heading">
               InfoTreeTech
             </span>
           </div>
