@@ -90,12 +90,18 @@ export default function Footer({ onOpenQr }) {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-amber-300/80 pt-4 border-t border-amber-800/60">
           <p>© {new Date().getFullYear()} {bakeryInfo.name}. All Rights Reserved.</p>
           
-          <div className="flex items-center gap-2 bg-gradient-to-r from-amber-900 via-amber-800 to-amber-900 px-4 py-2 rounded-full border border-amber-500/50 shadow-md">
+          <a
+            href="http://infotreetech.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-gradient-to-r from-amber-900 via-amber-800 to-amber-900 px-4 py-2 rounded-full border border-amber-500/50 shadow-md hover:border-amber-400 hover:scale-105 active:scale-95 transition-all cursor-pointer group"
+            title="Visit InfoTreeTech Website"
+          >
             <span className="text-amber-200 text-xs font-medium">Developed by</span>
-            <span className="font-extrabold text-amber-300 text-xs tracking-wider uppercase font-heading">
+            <span className="font-extrabold text-amber-300 group-hover:text-white text-xs tracking-wider uppercase font-heading underline underline-offset-2 decoration-amber-400/50">
               InfoTreeTech
             </span>
-          </div>
+          </a>
         </div>
       </div>
     </footer>
