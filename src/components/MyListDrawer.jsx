@@ -69,7 +69,8 @@ export default function MyListDrawer({ isOpen, onClose, myList, updateQuantity, 
     // Open WhatsApp with direct prompt to attach the downloaded slip
     const text = `Hello Gundanna Bakery! 🎂 Attached is my official uneditable Digital Order Slip (Security Code: *${orderChecksum}*).`;
     const encodedText = encodeURIComponent(text);
-    const whatsappUrl = `https://wa.me/${bakeryInfo.whatsapp}?text=${encodedText}`;
+    const targetPhone = (bakeryInfo.whatsapp || '919483622026').replace(/[^0-9]/g, '');
+    const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodedText}`;
     window.open(whatsappUrl, '_blank');
   };
 

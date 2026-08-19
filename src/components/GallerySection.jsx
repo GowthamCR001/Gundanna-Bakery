@@ -21,7 +21,7 @@ export default function GallerySection() {
 
   const handleWhatsAppInquiry = (e, cake) => {
     e.stopPropagation();
-    const phone = bakeryInfo.whatsappPhone || bakeryInfo.phone || '919900898516';
+    const phone = bakeryInfo.whatsapp || '919483622026';
     const text = encodeURIComponent(
       `Hello Gundanna Bakery! 🎂 I would like to inquire about ordering a custom birthday cake similar to: *${cake.title}* from your gallery.`
     );
