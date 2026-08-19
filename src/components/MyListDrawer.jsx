@@ -31,43 +31,47 @@ export default function MyListDrawer({ isOpen, onClose, myList, updateQuantity, 
     return item.category === 'Birthday Cakes';
   };
 
-  const handleWhatsAppShare = async () => {
+  const handleWhatsAppShare = () => {
     if (myList.length === 0) return;
     
-    // Always generate HD receipt image data URL
-    const dataUrl = generateReceiptImage(myList);
-    setReceiptDataUrl(dataUrl);
+    let text = `👋 *${bakeryInfo.name} — OFFICIAL SELECTION LIST*\n`;
+    text += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+    text += `🔒 *SECURITY VERIFICATION CODE:* \`${orderChecksum}\`\n`;
+    text += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
 
-    // Try Web Share API (Mobile Web View / Native Browser) if file sharing is supported
-    try {
-      if (navigator.share && window.File) {
-        const response = await fetch(dataUrl);
-        const blob = await response.blob();
-        const file = new File([blob], `Gundanna_Bakery_Order_${orderChecksum.replace(/[^a-zA-Z0-9]/g, '')}.png`, { type: 'image/png' });
+    myList.forEach((entry, idx) => {
+      text += `${idx + 1}. *${entry.item.name}* (Qty: ${entry.quantity}) = ₹${entry.item.price * entry.quantity}\n`;
+      
+      if (entry.customization) {
+        const { occasion, nameOnCake, eventDate, notes } = entry.customization;
+        const hasDetails = (occasion && occasion.trim()) || (nameOnCake && nameOnCake.trim()) || (eventDate && eventDate.trim()) || (notes && notes.trim());
         
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({
-            title: 'Gundanna Bakery Order Slip',
-            text: `Hello Gundanna Bakery! 🎂 Here is my official uneditable digital order slip (Verification Code: ${orderChecksum}).`,
-            files: [file]
-          });
-          return;
+        if (hasDetails) {
+          text += `   🎂 *CAKE CUSTOMIZATION DETAILS:*\n`;
+          if (occasion && occasion.trim()) {
+            text += `   • *Occasion:* ${occasion.trim()}\n`;
+          }
+          if (nameOnCake && nameOnCake.trim()) {
+            text += `   • *Name to Write on Cake:* "${nameOnCake.trim()}"\n`;
+          }
+          if (eventDate && eventDate.trim()) {
+            text += `   • *Celebration / Pickup Date:* ${eventDate.trim()}\n`;
+          }
+          if (notes && notes.trim()) {
+            text += `   • *Special Instructions:* ${notes.trim()}\n`;
+          }
         }
       }
-    } catch (err) {
-      console.log('Native file sharing fallback:', err);
-    }
+      text += `\n`;
+    });
 
-    // Fallback: Automatically trigger download of HD PNG Image & open WhatsApp chat
-    const a = document.createElement('a');
-    a.href = dataUrl;
-    a.download = `Gundanna_Bakery_Order_${orderChecksum.replace(/[^a-zA-Z0-9]/g, '')}.png`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    text += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+    text += `💰 *TOTAL ESTIMATED AMOUNT: ₹${totalPrice}*\n`;
+    text += `🔒 *VERIFICATION CODE:* \`${orderChecksum}\`\n`;
+    text += `⚠️ *SECURITY NOTICE:* Official price breakdown is cross-checked at Bakery Cash Counter against Security Code \`${orderChecksum}\`.\n\n`;
+    text += `📍 *Pickup Location:* ${bakeryInfo.shortName}, Hassan\n`;
+    text += `📞 *Phone:* ${bakeryInfo.phone}`;
 
-    // Open WhatsApp with direct prompt to attach the downloaded slip
-    const text = `Hello Gundanna Bakery! 🎂 Attached is my official uneditable Digital Order Slip (Security Code: *${orderChecksum}*).`;
     const encodedText = encodeURIComponent(text);
     const targetPhone = (bakeryInfo.whatsapp || '919483622026').replace(/[^0-9]/g, '');
     const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodedText}`;
@@ -512,7 +516,7 @@ export default function MyListDrawer({ isOpen, onClose, myList, updateQuantity, 
                   className="w-full flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
                 >
                   <Send className="w-4 h-4" />
-                  Send Digital Slip Image on WhatsApp 🖼️
+                  Send Order to WhatsApp (9483622026)
                 </button>
 
                 <button
