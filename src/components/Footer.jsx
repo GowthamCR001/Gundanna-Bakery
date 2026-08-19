@@ -87,11 +87,15 @@ export default function Footer({ onOpenQr }) {
         </div>
 
         {/* Footer Bottom bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-amber-300/70">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-amber-300/80 pt-4 border-t border-amber-800/60">
           <p>© {new Date().getFullYear()} {bakeryInfo.name}. All Rights Reserved.</p>
-          <p className="flex items-center gap-1">
-            Freshly Baked with <Heart className="w-3.5 h-3.5 fill-rose-500 text-rose-500" /> for standard QR Digital Menus
-          </p>
+          
+          <div className="flex items-center gap-1.5 bg-amber-900/90 px-3.5 py-1.5 rounded-full border border-amber-700/60 shadow-xs">
+            <span className="text-amber-200/90 text-xs font-medium">Developed by</span>
+            <span className="font-extrabold text-amber-300 text-xs tracking-wider">
+              InfoTreeTech
+            </span>
+          </div>
         </div>
       </div>
     </footer>
