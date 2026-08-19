@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 const CATEGORIES = [
   { id: 'All', label: 'All Items', icon: '🍽️' },
   { id: 'Specials', label: 'Specials', icon: '⭐' },
+  { id: 'Gallery', label: 'Cake Gallery', icon: '📸' },
   { id: 'Bread', label: 'Bread', icon: '🍞' },
   { id: 'Buns', label: 'Buns', icon: '🥯' },
   { id: 'Puffs', label: 'Puffs', icon: '🥐' },

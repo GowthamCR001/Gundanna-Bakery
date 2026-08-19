@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Instagram, ShoppingBag } from 'lucide-react';
+import { Phone, Instagram, ShoppingBag, Camera } from 'lucide-react';
 import bakeryInfo from '../data/bakeryInfo.json';
 
 export default function Navbar({ onOpenQr, listCount = 0, onOpenList }) {
@@ -54,6 +54,23 @@ export default function Navbar({ onOpenQr, listCount = 0, onOpenList }) {
               </span>
             </button>
           )}
+
+          {/* Cake Gallery Button */}
+          <button
+            onClick={() => {
+              const el = document.getElementById('section-gallery');
+              if (el) {
+                const yOffset = -120;
+                const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+              }
+            }}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-amber-100/80 hover:bg-amber-200/80 text-bakery-primary text-xs font-bold transition-all border border-amber-300/60 active:scale-95"
+            title="Explore Custom Cake Gallery"
+          >
+            <Camera className="w-3.5 h-3.5 text-amber-700" />
+            <span className="hidden xs:inline">Gallery</span>
+          </button>
 
           {/* Quick Call */}
           <a

@@ -9,6 +9,7 @@ import QrModal from '../components/QrModal';
 import MyListDrawer from '../components/MyListDrawer';
 import FloatingListBar from '../components/FloatingListBar';
 import Footer from '../components/Footer';
+import GallerySection from '../components/GallerySection';
 import { ArrowUp, Utensils, Leaf } from 'lucide-react';
 import rawMenuData from '../data/menu.json';
 import { resolveMenuImages } from '../utils/imageResolver';
@@ -363,6 +364,11 @@ export default function Home() {
             })
           )}
         </div>
+
+        {/* Custom Birthday Cake Gallery Section */}
+        {(!searchQuery && (selectedCategory === 'All' || selectedCategory === 'Gallery')) && (
+          <GallerySection />
+        )}
       </main>
 
       {/* Floating Selection List Bar */}
