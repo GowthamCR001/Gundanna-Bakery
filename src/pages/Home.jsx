@@ -10,7 +10,10 @@ import MyListDrawer from '../components/MyListDrawer';
 import FloatingListBar from '../components/FloatingListBar';
 import Footer from '../components/Footer';
 import { ArrowUp, Utensils, Leaf } from 'lucide-react';
-import menuData from '../data/menu.json';
+import rawMenuData from '../data/menu.json';
+import { resolveMenuImages } from '../utils/imageResolver';
+
+const menuData = resolveMenuImages(rawMenuData);
 
 const CATEGORY_ORDER = [
   'Bread',
