@@ -1,5 +1,31 @@
 [
   {
+    "id": 111,
+    "category": "Specials",
+    "name": "Chocolate Butter Bun (ಚಾಕೊಲೇಟ್ ಬಟರ್ ಬನ್)",
+    "price": 50,
+    "rating": 4.9,
+    "isVeg": true,
+    "popular": true,
+    "badge": "⭐ Fresh Special",
+    "availability": true,
+    "image": "Chocolate Butter Bun.webp",
+    "description": "Soft oven-baked sweet bun richly loaded with melted chocolate and creamy fresh butter."
+  },
+  {
+    "id": 112,
+    "category": "Specials",
+    "name": "Silky Rose tiramisu (ಸಿಲ್ಕಿ ರೋಸ್ ತಿರಮಿಸು)",
+    "price": 80,
+    "rating": 4.95,
+    "isVeg": true,
+    "popular": true,
+    "badge": "⭐ Trending Dessert",
+    "availability": true,
+    "image": "Silky Rose Tiramisu.webp",
+    "description": "Exquisite layered Italian dessert infused with delicate rose essence, velvety mascarpone cream, and soft espresso sponge."
+  },
+  {
     "id": 108,
     "category": "Specials",
     "name": "Tiramisu (ತಿರಮಿಸು)",
@@ -152,6 +178,19 @@
     "availability": true,
     "image": "Butter Bun.webp",
     "description": "Fluffy sweet bun split down the middle and stuffed with rich fresh butter & tutti frutti sprinkles."
+  },
+  {
+    "id": 316,
+    "category": "Buns",
+    "name": "Chocolate Butter Bun (ಚಾಕೊಲೇಟ್ ಬಟರ್ ಬನ್)",
+    "price": 50,
+    "rating": 4.9,
+    "isVeg": true,
+    "popular": true,
+    "badge": "⭐ Fresh Special",
+    "availability": true,
+    "image": "Chocolate Butter Bun.webp",
+    "description": "Soft oven-baked sweet bun richly loaded with melted chocolate and creamy fresh butter."
   },
   {
     "id": 302,
@@ -366,6 +405,19 @@
     "availability": true,
     "image": "Tiramisu.webp",
     "description": "Classic Italian layered dessert with rich mascarpone cheese cream, espresso-infused sponge, and fine Belgian cocoa dusting."
+  },
+  {
+    "id": 540,
+    "category": "Cakes",
+    "name": "Silky Rose tiramisu (ಸಿಲ್ಕಿ ರೋಸ್ ತಿರಮಿಸು)",
+    "price": 80,
+    "rating": 4.95,
+    "isVeg": true,
+    "popular": true,
+    "badge": "⭐ Trending Dessert",
+    "availability": true,
+    "image": "Silky Rose Tiramisu.webp",
+    "description": "Exquisite layered Italian dessert infused with delicate rose essence, velvety mascarpone cream, and soft espresso sponge."
   },
   {
     "id": 538,
